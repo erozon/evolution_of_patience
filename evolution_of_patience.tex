@@ -29,6 +29,7 @@
             labelfont={bf, it},
             textfont=it]{caption}
 
+\usepackage{lineno}
 
 \usepackage{epigraph}
 
@@ -177,57 +178,69 @@ converges. Our results imply that individual survival probability and ambient po
 \end{singlespace}
 
 \epigraph{Time is the most valuable thing a man can spend.}{---Theophrastus}
+\linenumbers
 \section{Introduction}
 
 
 Individuals regularly make decisions with delayed consequences. 
-We prefer large rewards to smaller alternatives. At the same time, 
-we are impatient, preferring rewards which come more immediately.
-Of interest is when our desires for immediacy and quantity are in oposition, in the form of 
+Common examples include choice of diet and 
+exercise, the management of addictions, and environmental stewardship. 
+In all cases, a decision must be made between an immediate benefit and a larger, more delayed alternative.
+Large rewards are preferred to smaller alternatives. At the same time, 
+individuals are impatient, preferring rewards which come more immediately.
+Of interest, and exhibited in each example, is when the desires for immediacy and quantity are in oposition, in the form of 
 a smaller/sooner ($\smallersooner$) versus larger/later ($\largerlater$) dilemma. 
-Common examples include retirement savings, choice of diet and 
-exercise, and the management of addictions. All of these scenarios require one to make an immediate decision with delayed
-ramifications. 
 
-
-Time preferences may be compactly defined using discounting functions. 
-A discounting function $\Delta(t)$ quantitatively describes the relationship between delay to reward and perceived value. A reward to be
-received after delay $t$ maintains a fraction $\Delta(t)\in(0, 1)$ of its nominal value. We assume that immediatly received
-rewards are not discounted at all, so that $\Delta(0) = 1$. Many studies
-have considered why (in theory) and how (in practice) individuals evaluate time. Correspondingly, discounting functions
+An individual's \textit{time preferences} describe her decision facing any potential smaller/sooner or larger/later dilemma. 
+To study time preferences mathematically, we use \textit{discounting functions} which quantitatively describe the relationship between
+delay to reward and perceived value. For time preferences described by discounting function $\Delta$, 
+a reward to be received after delay $t$ maintains a fraction $\Delta(t)\in(0, 1)$ of its nominal value. We assume that immediatly received
+rewards are not discounted at all, so that $\Delta(0) = 1$. For example, if $\Delta(5) = 1/2$, then we interpret that a reward receieved
+after $5$ units of time is worth half as much as if it were received immediately. Many studies
+have considered why (in theory) and how (in practice) individuals value time \cite{mazur85, ainslie75, green81, green04}. 
+Correspondingly, discounting functions
 can be derived from mathematical models or from experimental data. 
 
 Consider a simple model of time preferences.
-If we assume that delayed rewards lose a constant fraction of their value for every unit-time delay, the result is the exponential
-discounting model: 
+Assume that delayed rewards lose a constant fraction of their value for every unit-time delay. Intuitively, this assumption is appealing,
+and agrees with financial models of loans in which an interest rate is specified and a delayed reward is discounted exponentially
+to present value using the expression:
 \begin{equation}
     \Delta_{\exp}(t) = e^{-r t}.
 \end{equation}
-Here, $r>0$ is a parameter indicating how quickly a reward loses its value. The exponential discounting model is popular among economists
+Here, $r>0$ is a parameter indicating how quickly a reward loses its value. The exponential discounting model is popular among economists in particular
 for its straightforward assumptions and ease of use \cite{sozou98}. 
 
-
-Experimental results (for instance, see \cite{maia09, green04, doyle12}) find that observed discounting behaviour is better explained
-by a hyperbolic, rather than exponential, discounting function:
-\begin{equation}
-    \Delta_{\hyp}(t) = \frac{1}{1+ht}.
-\end{equation}
-Experimentalists also find evidence of behaviour not permissible in the exponential discounting model. 
-In \cite{read98} the authors find that
-when deciding between a snack of chocolate and fruit, the delay before consumption has a significant effect on choice. Concretely, I prefer a chocolate bar
-when I will consume immediately, but I prefer fruit salad if I am to snack after a week. This switch from impulsiveness to patience as
+Experimentalists find evidence of behaviour not permissible in the exponential discounting model \cite{read98}. 
+Specifically, Read et al. find that
+when deciding between a snack of chocolate and fruit, the delay before consumption has a significant effect on choice. Concretely, study participants
+prefer a chocolate bar
+when they will consume immediately, but prefer fruit salad if they are to snack after a week. This switch from impulsiveness to patience as
 the consequences become further removed is called a preference reversal. 
 Notably, exponential discounting is the only model of time preferences which does not predict preference reversals
 \cite{strotz55}. 
 
 
+Experimental results find that observed discounting behaviour is better explained
+by a hyperbolic, rather than exponential, discounting function \cite{maia09, green04, doyle12}. A hyperbolic discounting function takes
+the form:
+\begin{equation}
+    \Delta_{\hyp}(t) = \frac{1}{1+ht},
+\end{equation}
+where $h>0$ is a parameter analogous to $r$ in the exponential discounting model. The hyperbolic discounting model is used considerably less
+than the exponential model, in part due to its lack of theoretical foundations. One derivation of the hyperbolic discounting model relies
+on additive, \textit{simple interest} computations, which in financial modelling is considered irrational \cite{rachlin06}. 
+
+
 \begin{figure}[H]
     \centering
     \includegraphics{discounting_appreciation.png}
-    \caption[Example discounting and corresponding appreciation schedules.]{Appreciation is the reciprocal of discounting: an immediate reward of $P$ appreciates to value $F$ after delay $t$ whenever
-        $P = \Delta(t)\cdot F$. 
+    \caption[Example discounting and corresponding appreciation schedules.]{Discounting versus appreciation in delayed rewards. 
+        In figure (a), we see the discounted value of a reward of magnitude $1$ plotted as a function of delay $t$. In figure 
+        (b), we plot the same time preferences via appreciation, which is the reciprocal of discounting. An immediate reward of size $1$ is
+        of the same perceived value as a reward of size $1/\Delta(t)$ received after delay $t$. 
         Hyperbolic and exponential time preferences are more easily distinguished by appreciation, rather than discounting, plots.
-            Left: An exponential and a hyperbolic discounting function. Right: An appreciation plot. Exponential discounters exhibit exponential
+Exponential discounters exhibit exponential
         growth in appreciation, whereas hyperbolic discounting is consistent with linear growth.}
 \end{figure}
 
@@ -249,17 +262,19 @@ Notably, exponential discounting is the only model of time preferences which doe
 %        
 %       \end{figure}
 
-
-In practice, individuals rarely pick a discounting function or make decisions using mathematical models. 
-Every decision we make is a consequence of millions of years of selective pressures and evolution. The adaptive unconscious \cite{wegner02} is 
-the set of mental processes we use when making decisions without conscious and deliberate consideration. We start from the principle
-that time preferences are determined by the adaptive unconscious,
+Decisions involving patience are made by both human and non-human animals. Squirrels saving nuts for winter and bird which build elaborate nests
+both exhibit patience, investing time and energy in a delayed reward. While researchers may quantify any set of time preferences using
+some discounting function, the individuals being studied rarely make decisions by computing via a discounting function. 
+Every decision is a consequence of millions of years of selective pressures and evolution. The adaptive unconscious is 
+the set of mental processes we use when making decisions without conscious and deliberate consideration \cite{wegner02}. We start from the principle
+that time preferences are determined by the \textit{adaptive unconscious},
 which favours decisions aiding reproductive success. 
-We may therefore conclude that individuals' instinctive time preferences are determined by an adaptive discounting function,
+We may therefore conclude that individuals' instinctive time preferences are determined by an adaptive discounting function, which we denote
 \begin{equation}
     \Delta^*(t).
     \label{eqn:adaptive_discounting}
 \end{equation}
+
 
 \begin{figure}[H]
     \centering
@@ -272,20 +287,13 @@ We may therefore conclude that individuals' instinctive time preferences are det
     Since the exponential discounter's curves never cross, they always prefer $\smallersooner$. }
 \end{figure}
 
-Our work focuses on determining adaptive time preferences. 
-We follow in the footsteps of \cite{sozou98} and \cite{fawcett12}, which both reason along evolutionary lines. 
-In the former, Sozou argues that individuals best adapted
-to a constant, known risk will discount exponentially. He further shows that if the hazard rate is uncertain, non-exponential (and in particular,
-hyperbolic) discounting may
-be optimal. Sozou, however, neglects to consider opportunity cost, or the principle that time is inherently valuable. 
-In \cite{fawcett12}, the authors explicitly account for both risk and opportunity cost, and derive several models of discounting predicting 
-preference reversals. Their results, however, rely on very particular model setups, and each model produces a substantially different discounting
-function. In brief, the technical details matter, and it is not obvious which setup is best.
-
-
-%Indeed, \cite{gladwell05} has popularized the idea
-%that careful deliberation does not always yield superior outcomes to snap decision making. 
-
+Our work focuses on determining adaptive time preferences, following in the footsteps of previous research which reasons on evolutionary
+lines. For instance, it has been shown that individuals best adapted
+to a constant, known risk will discount exponentially, whereas if risk is uncertain, non-exponential (and in particular,
+hyperbolic) discounting may be optimal \cite{sozou98}. 
+There is also modeling work which shows that preference reversals may be an adaptive trait \cite{fawcett12}. 
+Our work complements the referenced articles by explaining time preferences through risk adaptation, showing that preference reversals
+are a natural, adaptive consequence of non-constant risk. 
 
 \section{Life Histories and Reproductive Success}
 
