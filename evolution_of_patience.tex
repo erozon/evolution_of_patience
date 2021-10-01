@@ -265,9 +265,9 @@ Exponential discounters exhibit exponential
 Decisions involving patience are made by both human and non-human animals. Squirrels saving nuts for winter and bird which build elaborate nests
 both exhibit patience, investing time and energy in a delayed reward. While researchers may quantify any set of time preferences using
 some discounting function, the individuals being studied rarely make decisions by computing via a discounting function. 
-Every decision is a consequence of millions of years of selective pressures and evolution. The adaptive unconscious is 
+Every decision is a consequence of millions of years of selective pressures and evolution. The \textit{adaptive unconscious} is 
 the set of mental processes we use when making decisions without conscious and deliberate consideration \cite{wegner02}. We start from the principle
-that time preferences are determined by the \textit{adaptive unconscious},
+that time preferences are determined by the adaptive unconscious,
 which favours decisions aiding reproductive success. 
 We may therefore conclude that individuals' instinctive time preferences are determined by an adaptive discounting function, which we denote
 \begin{equation}
@@ -288,26 +288,37 @@ We may therefore conclude that individuals' instinctive time preferences are det
 \end{figure}
 
 Our work focuses on determining adaptive time preferences, following in the footsteps of previous research which reasons on evolutionary
-lines. For instance, it has been shown that individuals best adapted
+lines. A common approach is to explicitly account for risk and/or opportunity cost when computing the relative value of immediate and delayed
+rewards. Risk refers to the possibility that a delayed reward may not be realized, whereas opportunity cost references the principle that
+time is valuable: delayed rewards are instinsically worth less than immediate rewards even in the absence of risk. 
+Previous work has shown that individuals best adapted
 to a constant, known risk will discount exponentially, whereas if risk is uncertain, non-exponential (and in particular,
-hyperbolic) discounting may be optimal \cite{sozou98}. 
-There is also modeling work which shows that preference reversals may be an adaptive trait \cite{fawcett12}. 
-Our work complements the referenced articles by explaining time preferences through risk adaptation, showing that preference reversals
+hyperbolic) discounting may be optimal \cite{sozou98}. By explicitly accounting for opportunity cost, one can derive models of constant
+risk in which non-exponential discounting and preference reversals are adaptive \cite{fawcett12}.
+Our work herein complements the work of both Fawcett et al. and Sozou by 
+explaining time preferences through risk adaptation, showing that preference reversals
 are a natural, adaptive consequence of non-constant risk. 
 
 \section{Life Histories and Reproductive Success}
 
-The work in \cite{sozou98} and \cite{fawcett12} is limited by assuming that rewards translate directly to fitness outcomes. We instead
-compute reproductive success
-using standard fitness measures from evolutionary ecology: either lifetime progeny $R_0$ or monomorphic population growth rate $\lambda$ 
-(see \cite{stearns92}).
+Consider a discrete time setup with a large population
+in which each agent's age is indexed by $a\in\left\{ 0, 1, \ldots, A \right\}$. That time is discrete is
+not a limiting assumption, since in practice we may take units of time small enough so as to be essentially continuous. Further, 
+the imposition of a maximal age class $A$ is reasonable since we may take $A$ large enough that death is guaranteed after
+age $A$. Suppose every individual in the population is subject to the same survival and fecundity
+schedules, $\vec{s} = (s_0, s_1, \ldots, s_{A-1}, s_A = 0)$, and $\vec{b} = (b_0, b_1, \ldots, b_A)$. Here, 
+$s_a$ is the probability of surviving from age $a$ to $a+1$, and $b_a$ is the expected
+number of offspring produced conditional on reaching age $a$. 
+The survival/reproduction pair of schedules $(\vec{s}, \vec{b})$
+is called the population's life history $\LH_0$. 
 
-Consider a population in which agents have the same survival and fecundity
-schedules, $\vec{s} = (s_0, s_1, \ldots, s_{A-1}, s_A = 0)$, and $\vec{b} = (b_0, b_1, \ldots, b_A)$, where $A$ is the maximal age after
-which death is guaranteed. The term $a$ indexes age, $s_a$ is the probability of surviving from age $a$ to $a+1$, and $b_a$ is the expected
-number of offspring produced at age $a$. 
-The survival/reproduction pair of schedules $\vec{s}, \vec{b}$
-is called the population's life history, and is denoted $\LH_0$. 
+We use this population to study the evolution of time preferences by providing agents with reproductive dilemmas: a choice
+between some offspring early in life and more offspring later. Agents' time preferences determine their reproductive schedule
+(in addition to baseline life history $\LH_0$). We assume 
+time preferences are subject to small mutations and study their evolutionary trajectory. Our analysis relies on 
+standard fitness measures from evolutionary ecology: lifetime progeny $R_0$ and monomorphic population growth rate $\lambda$ 
+\cite{stearns92}.
+ 
 
 Lifetime reproductive output is computed as
 \begin{equation}
@@ -324,26 +335,29 @@ appears in the discrete-time Euler-Lotka equation,
 
 
 Whereas the expression for $R_0$ is easily computed, the Euler-Lotka equation
-is a polynomial in $\lambda$ of degree $A+1$, and so has up to $A+1$ distinct solutions. The largest of those solutions is the Lyapunov exponent.
-The Euler-Lotka equation is derived from the Leslie matrix describing population dynamics with life history $\LH_0$ (see \cite{stearns92}
-for details). In practice, the Lyapunov exponent is computed numerically, and in each expression, the empty product evaluates to $1$. 
+is a polynomial in $\lambda$ of degree $A+1$, and so has up to $A+1$ distinct solutions. The largest of these solutions gives the growth
+rate of a monomorphic population, the Lyapunov exponent.
+The Euler-Lotka equation is derived from the Leslie matrix describing population dynamics with life history $\LH_0$ \cite{stearns92}.
+In practice, the Lyapunov exponent is computed numerically, and in each expression, the empty product evaluates to $1$. 
 In the long run, a population with fixed life history will converge to a stable age distribution and
 thus grow (or decay) 
 exponentially at a constant rate $\lambda$ per unit time. If $\lambda = 1$, then the population remains at a constant size indefinitely.
 
-We use population growth $\lambda$ as our measure of reproductive success. The assumption that populations grow exponentially is not without limitations.
-By using $\lambda$, we implicitly assume that resources are in inexhaustible supply 
-and do not limit growth. It therefore
-may be useful to think of $\lambda \approx 1$ as the standard case, outside of which justification is required. Later, it is shown that assuming
-$\lambda = 1$ is equivalent to using lifetime reproductive output $R_0$ to determine adaptive time preferences.
-With these caveats taken care of, the question is now: What selective pressures does $\lambda$ 
+We use population growth $\lambda$ as our measure of reproductive success. The assumption that populations grow exponentially is limiting: if
+ever $\lambda > 1$,  we implicitly assume that resources are in inexhaustible supply 
+and do not limit growth. A sustainable population is one that is of constant size, which has
+$\lambda \approx 1$. The question is now: What selective pressures does $\lambda$ 
 exert over time preferences?
 
 
 \section{Reproductive Dilemmas}
-To model time preferences, we present each agent with a randomly determined
+Recall that time preferences are defined to be an individual's decision facing any dilemma between a smaller/sooner reward
+and a larger/later alternative. By presenting agents with such dilemmas and allowing an evolutionary process to determine which
+time preferences are adopted and which go extinct, we may determine adaptive time preferences. 
+
+In our model, we present each agent with a stochastically determined
 smaller/sooner versus larger/later fecundity dilemma.  As motivation, consider
-a stochastically varying environment in which resource fluctuations result in the option to
+a randomly varying environment in which resource fluctuations result in the option to
 increase reproduction at various points over the life history. Note that these fecundity increases are in addition to a baseline life history
 $\LH_0$ common to all agents.  
 Fix $\varepsilon > 0$ small.  
@@ -352,17 +366,21 @@ Individuals decide between:
     \item $\smallersooner:$ increase fecundity at age $a$ to $b_a\uparrow b_{a} + \varepsilon$, and
     \item $\largerlater:$ increase $b_{a+1}\uparrow b_{a+1} + F\cdot \varepsilon$.
 \end{enumerate}
+
 We use $\varepsilon > 0$ as our unit of fecundity dilemma, since we assume environmental stochasticity results in relatively small changes to 
 fecundity. 
 Denote each dilemma by the pair $(a, F)$, where $a$ is the age at which the dilemma is faced,
 and $F$ is the ratio of $\largerlater$ to $\smallersooner$. 
+Remark that we assume dilemmas are between age $a$ and $a+1$ rather than an arbitrary delay $a+t$. This restriction simplifies our analysis
+while still allowing for a full understanding of evolved time preferences, since knowing preferences between $a$ and $a+1$ as well as between
+$a+1$ and $a+2$, we infer preferences between $a$ and $a+2$. 
 
 \begin{figure}[H]
     \centering
     \includegraphics{evolutionary_dilemma.png}
     \caption[Baseline life history and reproductive dilemma example.]{A baseline life history $\vec{s}, \vec{b}$ can be visualized as a bar plot. The bar at $a$ is the expected number of offspring at
         age $a$, given by
-    $\prod_{k = 0}^{a-1} s_k b_a$. Evolutionary dilemmas are additions to fecundity. Illustrated is the dilemma $(2, 3)$, with
+    $\prod_{k = 0}^{a-1} s_k b_a$. Reproductive dilemmas are additions to fecundity. Illustrated is the dilemma $(2, 3)$, with
 $\varepsilon = 0.01$. That is, an agent faces a choice between an additional $0.01$ offspring at age $2$ and an additional $0.03$ offspring
 at age $3$.} 
 \end{figure}
@@ -373,8 +391,7 @@ Consider a dilemma $(a, F)$. The switching point $x_a$ is the unique value satis
 if and only if $F < x_a$. 
 A patience threshold is a collection of switching points $(x_0, \ldots, x_{A-1})$.
 Since a patience threshold indicates preferences facing any dilemma $(a, F)$, time preferences may be uniquely 
-specified by either a patience threshold or a discounting function. We work with patience thresholds
-for the mathematical analysis before translating back to discounting functions for further interpretation and discussion. 
+specified by either a patience threshold or a discounting function. 
 
 \begin{figure}[H]
     \centering
@@ -395,7 +412,9 @@ indicates the reverse. A horizontal patience threshold is consistent with expone
 By way of summary, our model includes a large (or infinite) population sharing the same baseline life history $\LH_0 = (\vec{s}, \vec{b}).$ 
 Each agent faces a stochastically determined dilemma, denoted $(a, F)$, between a smaller/sooner and a larger/later fecundity reward. 
 Time preferences are given by a patience threshold $(x_0, x_1, \ldots, x_{A-1})$. 
-We proceed to consider the consequences of allowing an adaptive process to determine the patience threshold. 
+An individual's time preferences determine their reproductive success; by using the Lyapunov exponent $\lambda$ to measure reproductive 
+success, we are using the difference in population growth rate between residents and mutants to compute the evolutionary dynamics of time
+preferences and patience. 
 
 
 \section{Adaptive Discounting}
