@@ -114,6 +114,7 @@
 \DeclareMathOperator{\MRS}{MRS}
 \DeclareMathOperator{\smallersooner}{SS}
 \DeclareMathOperator{\largerlater}{LL}
+\DeclareMathOperator{\ES}{ES}
 %\DeclareMathOperator{\exp}{exp}
 \DeclareMathOperator{\hyp}{hyp}
 \renewcommand\d[1]{\:\textrm{d}#1}
@@ -338,6 +339,11 @@ Whereas the expression for $R_0$ is easily computed, the Euler-Lotka equation
 is a polynomial in $\lambda$ of degree $A+1$, and so has up to $A+1$ distinct solutions. The largest of these solutions gives the growth
 rate of a monomorphic population, the Lyapunov exponent.
 The Euler-Lotka equation is derived from the Leslie matrix describing population dynamics with life history $\LH_0$ \cite{stearns92}.
+While it is not possible to compute analytically, the Lyapunov exponent is implicitly a function of life history data:
+\begin{equation}
+    \lambda = \lambda(\LH_0) = \lambda(b_0, b_1, \ldots, b_{A}, s_0, s_1, \ldots, s_{A-1}).
+    \label{eqn:lambda_function}
+\end{equation}
 In practice, the Lyapunov exponent is computed numerically, and in each expression, the empty product evaluates to $1$. 
 In the long run, a population with fixed life history will converge to a stable age distribution and
 thus grow (or decay) 
@@ -417,30 +423,48 @@ success, we are using the difference in population growth rate between residents
 preferences and patience. 
 
 
-\section{Adaptive Discounting}
-Adaptive dynamics is a framework for mathematically describing the trajectory of a continuosly varying trait when subject to evolutionary pressures 
-\cite{doebeli05}. In our case, we consider time preferences as encoded by each switching point $x_a$ of the patience threshold.
+\section{Adaptive Dynamics of Patience}
+Adaptive dynamics is a framework for mathematically describing the trajectory of a continuosly varying trait when subject to evolutionary pressures. 
 Adaptive dynamics makes two key assumptions. First, we assume that mutations are small. Second, mutations occur infrequently.
-Under these meager assumptions, it can be shown that a mutant either goes extinct or replaces the resident population before any more mutations occur.
-Therefore, a mutant with slightly different patience threshold is assumed to be invading into a population in which all agents share the same
-time preferences. 
+Under these assumptions, a mutant either goes extinct or replaces the resident population before any more mutations occur \cite{doebeli05}.
 A value to which a trait converges is called convergent stable. A value to which a trait remains if already there is called evolutionarily stable.
 Neither form of stability implies the other. For instance, a trait value which is convergent stable and not evolutionarily stable is called an
-evolutionary branching point \cite{doebeli11}. We use adaptive dynamics
-to derive a set of time preferences which we show to be both convergent stable and evolutionarily stable. 
+evolutionary branching point. A major contribution of adaptive dynamics is the explanation of sympatric speciation, the 
+evolution of two different species in the same environment \cite{doebeli11}. 
 
-Suppose a population has baseline life history $\LH_0$ and 
-initial patience threshold $(x_0, x_1, \ldots, x_{A-1})$. Consider a mutant with almost the same time preferences, but
-with switching point $y_a > x_a$ for some $a$. Then the mutant is slightly less patient than the resident.
-The resident population and the mutant obtain identical outcomes except for dilemmas at age $a$ with ratio $F$ such that $x_a < F < y_a$, meaning
-residents choose $\largerlater$ and the mutant chooses $\smallersooner$. 
-For such a dilemma $(a, F)$, we analytically compute reproductive success via a first order Taylor
-approximation: 
+More technincally, suppose a continuously varying trait is subject to evolutionary pressures. \textit{Invasion fitness} is the relative
+success of a rare mutant with trait value $y$ invading into a monomorphic population with trait value $x$, $\varphi(y, x)$. If invasion
+fitness is positive, $\varphi(y, x) > 0$, then a rare mutant fixates. Our framework lends itself well to analysis by differentiation. 
+Increasing the trait value slightly is either beneficial, in which case the mutation fixates, or it is not beneficial, in which
+case the mutation vanishes. Adaptive dynamics describes the trajectory of the trait value $x$. 
+The \textit{selection gradient} is the function 
+\begin{equation}
+    D(x) = \left.\frac{\partial }{\partial y} \right\vert_{y = x}\varphi(y, x).
+    \label{eqn:selection_gradient}
+\end{equation}
+If trait value $x$ is such that $D(x) > 0$, increasing the trait value is adaptive. If $x^*$ is such that $D(x^*) = 0$, then $x^*$ is a
+singular value. If $D(x^*) = 0$ and $D'(x^*) < 0$, 
+then $x^*$ is convergent stable: the trait value will converge to $x^*$. To determine if the trait value will remain at $x^*$, compute
+\begin{equation}
+    \ES(x) = \left.\frac{\partial^2 }{\partial y^2} \right\vert_{y = x}\varphi(y, x).
+    \label{eqn:evolutionary_stability}
+\end{equation}
+If $\ES(x^*) < 0$, then trait value $x^*$ is evolutionarily stable. The trait converges to and remains at $x^*$. On the other hand, if
+$\ES(x^*) > 0$, then $x^*$ is an evolutionary branching point: after converging to $x^*$, two distinct populations diverge from value $x^*$, one
+with trait values above and the other below $x^*$.  We here apply adaptive dynamics to the evolution of time preferences. 
+
+Suppose a population has baseline life history $\LH_0$ and begins with all individuals having the same time preferences,
+encoded as a patience threshold $(x_0, x_1, \ldots, x_{A-1})$. We compute the adaptive dynamics of each switching point
+$x_a$ independently. Therefore, we consider a mutant with switching point $y_a > x_a$ arising in a monomorphic population with switching point $x_a$.  
+The mutant under consideration is slightly less patient than the resident population. Residents and mutants obtain identical outcomes except for dilemmas
+at age $a$ with ratio $F$ such that $x_a < F < y_a$, meaning residents choose $\largerlater$ and mutants choose $\smallersooner$. 
+To determine if the mutant with trait value $y_a$ is benefited, we analytically compute reproductive success via a first order Taylor approximation:
 \begin{align}
     \lambda(\LH_0 + \smallersooner) &\approx \lambda(\LH_0) + \varepsilon \cdot \varSS \\
     \lambda(\LH_0 + \largerlater) &\approx \lambda(\LH_0) + F\varepsilon \cdot \varLL.
 \end{align}
-From the Taylor approximation we can identify the payoff from choosing each alternative, 
+Recall from equation (\ref{eqn:lambda_function}) that the Lyapunov exponent is implicitly a function of the fecundity terms $b_a$. 
+From the Taylor approximation we identify the payoff from choosing each alternative, 
 $\pi_{\smallersooner}$ and $\pi_{\largerlater}(F)$. Remark that the larger/later payout
 varies as a function of $F$, whereas the smaller/sooner payout is constant. We have: 
 \begin{align}
@@ -448,29 +472,28 @@ varies as a function of $F$, whereas the smaller/sooner payout is constant. We h
     \pi_{\largerlater}(F) &= F\varepsilon\cdot \varLL. \label{eqn:varll}
 \end{align}
 
-Invasion fitness describes the relative success of a rare mutant.  Mathematically, invasion fitness is the difference in payout received between a mutant 
-and residents. 
-Positive invasion fitness implies the mutant will fixate, whereas negative
-invasion fitness implies the mutant will go extinct.
-Since dilemmas
-vary stochastically, invasion fitness is the \textit{average} difference in payout. Suppose the larger/later value $F$ is distributed with probability
-density function $g(F)$. 
+Invasion fitness describes the relative success of a rare mutant, and is the difference in reproductive success between
+a mutant and residents.  We assume dilemmas
+vary stochastically, so invasion fitness is the \textit{average} difference in success. Suppose the larger/later value $F$ is distributed with probability
+density function $g_a(F)$. 
 Denote by $\varphi_a(y_a, x_a)$ the invasion fitness of a mutant with switching point
 $y_a$ into a resident population with switching point $x_a$.  
-Recall that when $x_a < F < y_a$, residents choose the larger/later option and mutants prefer the smaller/sooner alternative. 
-Invasion fitness is given by
+Recall that when $x_a < F < y_a$, residents choose the larger/later option and mutants prefer the smaller/sooner alternative, whereas
+outside of this interval outcomes are identical. Invasion fitness is then the average difference $\pi_{\smallersooner} - \pi_{\largerlater}(F)$
+over all dilemmas $(a, F)$, for $a$ fixed. 
+Mathematically, therefore, invasion fitness is given by 
 \begin{align}
     \varphi_a(y_a, x_a) &= \mathbb{E}\left[ \pi_{\smallersooner} - \pi_{\largerlater}(F) \ | \ x_a < F < y_a\right] \\
-    &= \int_{x_a}^{y_a} \left[ \pi_{\smallersooner} - \pi_{\largerlater}(F) \right]g(F) \d F. 
+    &= \int_{x_a}^{y_a} \left[ \pi_{\smallersooner} - \pi_{\largerlater}(F) \right]g_a(F) \d F. 
 \end{align}
 Remark that the expression for invasion fitness
 $\varphi_a$ is the same whether $x_a < y_a$ or $y_a < x_a$, and is $0$ when $x_a = y_a$. 
-Since dilemmas are distributed randomly, we compute the expected value as a weighted integral according to the distribution of $F$.
+Since we assume dilemmas are distributed randomly, we compute the expected value as a weighted integral according to the distribution of $F$ over
+the interval on which the payouts differ. 
 
-We can analyse invasion fitness $\varphi_a(y_a, x_a)$ mathematically to derive insights about adaptive traits. By differentiating, we compute
-the selection gradient $D(x_a)$. Increasing the switching point $x_a$ is adaptive if and only if $D(x_a) > 0$. A trait value $x_a^*$ at which
-$D(x_a^*) = 0$ is called singular, and $x_a^*$ may be convergent and/or evolutionarily stable. 
-We compute:
+From invasion fitness $\varphi_a(y_a, x_a)$, we compute the selection gradient $D(x_a)$ to determine which switching points
+are singular strategies.  
+Recall that increasing the switching point $x_a$ is adaptive if and only if $D(x_a) > 0$. We compute: 
 \begin{align}
     D(x_a) &= \left.\frac{\partial }{\partial y_a} \right\vert_{y_a = x_a}\varphi_a(y_a, x_a)  \\
     &=\left.\frac{\partial }{\partial y_a} \right\vert_{y_a = x_a}  \int_{x_a}^{y_a} \left[ \pi_{\smallersooner} - \pi_{\largerlater}(F) \right]g(F) \d F\\
@@ -479,7 +502,7 @@ We compute:
 We verify that $D(x_a^*) = 0$ is solved whenever the payout from choosing smaller/sooner equals that from choosing larger/later,
 $\pi_{\smallersooner} = \pi_{\largerlater}(x_a^*)$. Intuitively, this result is reasonable: the switching point which we will show to be evolutionarily
 stable is the one at which the payout from smaller/sooner is the same as that from larger/later. 
-We compute from equations \ref{eqn:varss} and \ref{eqn:varll} that
+We compute from equations (\ref{eqn:varss}) and (\ref{eqn:varll}) that
 $x_a^* =  \varSS/\varLL$. 
 
 We can further show that $x_a^*$ 
@@ -495,30 +518,32 @@ By evaluating at $(y_a, x_a) = (x_a^*, x_a^*)$, we determine the convergent and 
     \frac{\partial^2 \varphi_a}{\partial y^2}(x_a^*, x_a^*) &= -\varepsilon \varLL g(x_a^*) + \left[ \varepsilon \varSS - \varepsilon \frac{\varSS}{\varLL}
     \varLL\right]g'(x_a^*) \\
     &= -\varepsilon \varLL g(x_a^*) + \left[0  \right]\cdot g'(x_a^*)\\
-    &= -\varepsilon\varLL g(x_a^*) < 0
+    &= -\varepsilon\varLL g(x_a^*) < 0 \label{eqn:negative}
 \end{align}
-The final result is known to be negative. We have assumed $\varepsilon > 0$, and since $g$ is a probability density function, it is also
+The quantity in line (\ref{eqn:negative}) is negative. By assumption, $\varepsilon > 0$. Since $g$ is a probability density function, it is also
 positive. Finally, since reproductive success $\lambda$ increases with fecundity, the derivative is also positive, and so the expression is
 negative. 
-Therefore, we conclude that the switching point will converge to $x_a^*$, and once there, it will not deviate. 
+We conclude that the switching point will converge to $x_a^*$, and once there, it will not deviate: the switching point $x_a^*$ is both
+convergent and evolutionarily stable. 
 
 Remark that the switching point $x_a^* =  \varSS/\varLL$ has been computed specifically for dilemmas at age $a$. We therefore now extend to
 the evolutionarily stable patience threshold $(x_0^*, x_1^*, \ldots, x_{A-1}^*)$. 
-We may translate with ease between discounting functions and patience thresholds. Given a patience threshold $(x_0, x_1, \ldots)$, the corresponding
-discounting function is given by 
+We may translate with ease between discounting functions and patience thresholds. Given any patience threshold $(x_0, x_1, \ldots)$, the corresponding
+discounting schedule is given by 
 \begin{equation}
-    \Delta(t) = \left( \prod\limits_{k = 0}^{t - 1} x_k \right)^{-1}.
+    \Delta(t) = \left( \prod\limits_{k = 0}^{t - 1} x_k \right)^{-1}. \label{eqn:disc_from_thresh}
 \end{equation}
 Consequently, the evolutionarily stable discounting function (corresponding to our derived patience threshold) is
 \begin{equation}
     \Delta^*(a) = \varSS/\frac{\partial \lambda}{\partial b_0}. 
     \label{eqn:stable_discounting}
 \end{equation}
-There is an important difference between the evolutionarily stable discounting function $\Delta^*(a)$ and a discounting function in the classical sense. 
-The classical theory of time preferences sees discounting as age agnostic: delayed rewards are discounted to present value. The adaptive discounting
-function $\Delta^*$, on the other hand, discounts delayed rewards to their value at age class $0$. The two views may be made equivalent by assuming
-that all dilemmas are asked of our evolutionary agent when they are at age $0$. 
-
+Remark that between equations (\ref{eqn:disc_from_thresh}) and (\ref{eqn:stable_discounting}), the delay variable changes from $t$ to $a$. 
+We do so to highlight an important difference between the classical theory of time preferences and our approach. 
+Classical discounting functions are age agnostic: delayed rewards are discounted to present value. In our evolutionarily stable discounting
+function $\Delta^*(a)$, however, age matters. Rather than offering a reward today or more tomorrow, we offer a reward at age $a$ or a larger
+reward at age $a+1$. To compare delayed rewards against a common benchmark, delayed rewards are all translated to discounted value at
+age $0$, the initial age class. 
 
 
 
