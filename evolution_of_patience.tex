@@ -500,7 +500,7 @@ Recall that increasing the switching point $x_a$ is adaptive if and only if $D(x
         &=\left[ \pi_{\smallersooner} - \pi_{\largerlater}(x_a)   \right]g(x_a) 
 \end{align}
 We verify that $D(x_a^*) = 0$ is solved whenever the payout from choosing smaller/sooner equals that from choosing larger/later,
-$\pi_{\smallersooner} = \pi_{\largerlater}(x_a^*)$. Intuitively, this result is reasonable: the switching point which we will show to be evolutionarily
+$\pi_{\smallersooner} = \pi_{\largerlater}(x_a^*)$. Intuitively, this result is reasonable: the singular switching point 
 stable is the one at which the payout from smaller/sooner is the same as that from larger/later. 
 We compute from equations (\ref{eqn:varss}) and (\ref{eqn:varll}) that
 $x_a^* =  \varSS/\varLL$. 
@@ -538,22 +538,19 @@ Consequently, the evolutionarily stable discounting function (corresponding to o
     \Delta^*(a) = \varSS/\frac{\partial \lambda}{\partial b_0}. 
     \label{eqn:stable_discounting}
 \end{equation}
-Remark that between equations (\ref{eqn:disc_from_thresh}) and (\ref{eqn:stable_discounting}), the delay variable changes from $t$ to $a$. 
+Between equations (\ref{eqn:disc_from_thresh}) and (\ref{eqn:stable_discounting}), the delay variable changes from $t$ to $a$. 
 We do so to highlight an important difference between the classical theory of time preferences and our approach. 
 Classical discounting functions are age agnostic: delayed rewards are discounted to present value. In our evolutionarily stable discounting
 function $\Delta^*(a)$, however, age matters. Rather than offering a reward today or more tomorrow, we offer a reward at age $a$ or a larger
-reward at age $a+1$. To compare delayed rewards against a common benchmark, delayed rewards are all translated to discounted value at
+reward at age $a+1$. To compare delayed rewards against a common benchmark, delayed rewards are translated to discounted value at
 age $0$, the initial age class. 
 
-
-
-\section{Computation and Interpretation}
 The Euler-Lotka equation can be leveraged to compute an expression for the evolutionarily stable switching points. By using
 implicit differentiation, we compute
 \begin{equation}
     \frac{\partial \lambda}{\partial b_a} = K\cdot \lambda^{-a} \prod\limits_{k = 0}^{a-1}s_k,
 \end{equation}
-where $K$ is an expression independent of $a$. We can now compute the evolutionarily stable switching point 
+where $K>0$ is an expression independent of $a$. We can now compute the evolutionarily stable switching point 
 \begin{equation}
     x_a^* = \frac{\varSS}{\varLL} = \frac{K\cdot \lambda^{-a} \prod\limits_{k = 0}^{a-1}s_k}{K\cdot \lambda^{-a-1} \prod\limits_{k = 0}^{a}s_k} = \frac{\lambda}{s_a}.
 \end{equation}
@@ -562,13 +559,20 @@ We further compute the adaptive discounting function
     \Delta^*(a) = \lambda^{-a}\prod\limits_{k = 0}^{a-1} s_k.
 \end{equation}
 
-Our approach lends itself to rich and organic interpretability. Previous aproaches to adaptive time preferences \cite{sozou98, fawcett12} explicitly
-account for risk and/or opportunity cost as reasons to discount delayed rewards. It is therefore not surprising that their derived discounting
-functions include terms corresponding to risk/opportunity cost. A pleasing feature of our life history approach to time preferences is that
-we make no assumptions about why individuals should discount delayed rewards, but rather allow an evolutionary process to produce time preferences.  
-Our results are nevertheless cleanly interpretable and point to both risk and opportunity cost as rationales for impatience.  
 
-Remark that the adaptive dynamics approach in the previous section did not rely on the use of population growth $\lambda$ at all. We could therefore
+
+\section{Interpretation and Discussion}
+
+The discounting function $\Delta^*(a)$ is derived from allowing an evolutionary process to determine time preferences. The only assumption
+we have made is that the Lyapunov exponent, or monomorphic population growth rate, corresponds to evolutionary fitness. By studying
+the functional form of the adaptive discounting function $\Delta^*(a)$, we infer that there are two distinct evolutionary pressures to prefer
+immediate to delayed rewards. It is adaptive to prefer immediate rewards over delayed rewards due to both
+risk of death and opportunity cost (that is, delayed rewards are intrinsically worth less). Our assumptions do not contradict those
+of the exponential discounting model: while an environment may present constant risk, we allow individuals inside of that environment to experience
+risk differently dependent on age. 
+
+The mathematics in the previous section does not rely on the Lyapunov exponent $\lambda$ until it is used
+explicitly to compute $\Delta^*(a)$. We could therefore
 run through the same argument to produce a discounting function resulting from lifetime reproductive output $R_0$ as our measure of success. In this
 case, 
 \begin{equation}
@@ -577,70 +581,72 @@ case,
 Note that this is the same expression as when computing with the Lyapunov exponent with $\lambda = 1$. From this observation we derive insight into
 the reason for the presence of each term in the adaptive discounting function $\Delta^*$. 
 \begin{enumerate}
-    \item The product $\prod s_k$ accounts for \textit{risk}. Fecundity rewards later in life must be discounted since there is a risk that the
+    \item The product $\prod s_k$ accounts for risk. Fecundity rewards later in life must be discounted since there is a risk that the
         agent not survive to benefit from them.
-    \item The exponential term $\lambda^{-a}$ accounts for \textit{opportunity cost}. When time preferences evolve in the context of a growing
-        population, there is adaptive pressure to prefer more immediate rewards. 
+    \item The exponential term $\lambda^{-a}$ accounts for opportunity cost. When time preferences evolve in the context of a growing
+        population, there is selective pressure to prefer more immediate rewards. 
 \end{enumerate}
 
 We see that populations which are of constant size see no opportunity cost to delaying
 reproduction, whereas growing populations face more pressure to reproduce earlier. 
 From an ecological perspective, therefore, our theoretical work provides quantitative justification for the phenomenological demographic principle that
-``a slowly growing population selects a later age of first reproduction than does a rapidly growing population,'' as 
-described in \cite{bull04}.  
+``a slowly growing population selects a later age of first reproduction than does a rapidly growing population''  
+\cite{bull04}.  
 
-\begin{table}[h]
-    \centering
-\begin{tabular}{|l|l|}
-    \hline
-Population Size & Opportunity Cost            \\ \hline \hline
-Constant             & None                            \\
-Growing         & Reproduce Earlier \\
-Shrinking       & Reproduce Later (Opportunity Benefit?) \\ \hline
-\end{tabular}
-\caption[Indicates opportunity cost as determined by demographic growth/decay.]{When a population is growing ($\lambda > 1$), there is an opportunity cost to reproducing later in life. Of note is that 
-when a population is dying out $(\lambda < 1)$, there is an opportunity benefit to delaying reproduction. If $\lambda < 1$, then in 
-the discounting function
-$\lambda^{-a}$ becomes larger as $a$ increases, so that an offspring produced late in life may be worth more than one produced earlier. If delayed
-rewards are valued more than earlier rewards (meaning the discounting function is increasing rather than decreasing), we 
-refer to such time preferences as inverted.}
-\end{table}
+%\begin{table}[h]
+%    \centering
+%\begin{tabular}{|l|l|}
+%    \hline
+%Population Size & Opportunity Cost            \\ \hline \hline
+%Constant             & None                            \\
+%Growing         & Reproduce Earlier \\
+%Shrinking       & Reproduce Later (Opportunity Benefit?) \\ \hline
+%\end{tabular}
+%\caption[Indicates opportunity cost as determined by demographic growth/decay.]{When a population is growing ($\lambda > 1$), there is an opportunity cost to reproducing later in life. Of note is that 
+%when a population is dying out $(\lambda < 1)$, there is an opportunity benefit to delaying reproduction. If $\lambda < 1$, then in 
+%the discounting function
+%$\lambda^{-a}$ becomes larger as $a$ increases, so that an offspring produced late in life may be worth more than one produced earlier. If delayed
+%rewards are valued more than earlier rewards (meaning the discounting function is increasing rather than decreasing), we 
+%refer to such time preferences as inverted.}
+%\end{table}
 
-\section{Examples and Preference Reversals}
-Our results do not exclude the possibility of exponential discounting. Suppose that survival probability is constant, each individual
-surviving from age $a$ to $a+1$ with probability $s\in(0, 1)$. Let $\lambda$ be the growth rate of the population. We therefore compute
-that $\Delta^*(a) = (\lambda/s)^{-a}$. Just as in \cite{sozou98}, a constant, known hazard to survival results in exponential discounting
-being adaptive. 
+\section{Preference Reversals}
+The time preferences described by the adaptive discounting function $\Delta^*(a)$ are compatible with preference reversals. 
+So long as survival probability is not constant across age classes, $\Delta^*(a) \ne e^{-ra}$ for any $r$, which means discounting
+is not exponential and preference reversals are guaranteed to occur. Therefore, our findings counter the common perception that preference
+reversals are irrational, justifying them as an evolutionarily adaptive trait. 
 
-Our findings are also compatible with models of hyperbolic discounting, so long as the survival schedule is appropriately tuned. Suppose
-that survival probability is given by $s_a = \frac{a+1}{a+2}$. If $\lambda$ is once more the Lyapunov exponent of the population, adaptive
+If survival probability is of a very particular form, hyperbolic discounting is predicted. 
+Suppose survival probability is given by $s_a = \frac{a+1}{a+2}$. If $\lambda$ is once more the Lyapunov exponent of the population, adaptive
 discounting is given by the product $\Delta^*(a) = \lambda^{-a}\frac{1}{1+a}$, a combination of both exponential and hyperbolic discounting. 
 If the population size is constant, then $\lambda = 1$ and time preferences are purely hyperbolic. More generally, if 
 $h>0$ and $s_a = \frac{1+ha}{1 + h(a+1)}$, then adaptive discounting
-is computed to be $\Delta^*(a) = \lambda^{-a}\frac{1}{1+ha}$. 
-
-A major drawback of the exponential discounting model is that it precludes the possibility of preference reversals: the phenomenon that the
-age at which a dilemma is faced may change preferences. While hyperbolic discounting allows for preference reversals, it is not unique in 
-this respect. Recall that any
-non-exponential model of time preferences predicts preference reversals. 
-So long as survival probability is increasing in age (that is, $s_0 < s_1 < \ldots$), preference reversals are predicted from $\smallersooner\to
-\largerlater$ as the age at dilemma increases. On the other hand, if survival probability decreases in age ($s_0 > s_1 > \ldots$), preference reversals are 
+is computed to be $\Delta^*(a) = \lambda^{-a}\frac{1}{1+ha}$. Facing a smaller/sooner versus larger/later dilemma, preference reversals are
+predicted from smaller/sooner to larger/later as the delay to each alternative increases. 
+More generally, preference reversals from $\smallersooner\to\largerlater$ are predicted to occur whenever survival probability is increasing in age:
+$s_0 < s_1 < \ldots$.  On the other hand, if survival probability decreases in age ($s_0 > s_1 > \ldots$), preference reversals are 
 predicted from $\largerlater\to\smallersooner$. 
 
-\begin{table}[h]
-    \centering
-\begin{tabular}{|l|l|}
-    \hline
-Survival Probability & Preference Reversals            \\ \hline \hline
-Constant             & None                            \\
-Increasing           & $\smallersooner\to\largerlater$ \\
-Decreasing           & $\largerlater\to\smallersooner$ \\ \hline
-\end{tabular}
-\caption[Association between survival probability and type of preference reversals.]{Survival probability determines whether preference reversals occur, and in which direction. Intuitively, if survival 
-decreases with age, then individuals are less willing to wait for delayed rewards later in life than they are early on. For instance,
-facing a smaller/sooner versus larger/later dilemma at age $25$, I may be willing to wait for the larger/later reward. At the age of
-$85$, however, the risk inherent in waiting means I prefer the smaller/sooner option.}
-\end{table}
+Remark that the Lyapunov exponent $\lambda$ does not influence preference reversals. Since $\Delta^*(a) = \lambda^{-a} \prod s_k$, the Lyapunov
+exponent appears as an exponential discounting factor and therefore implies no preference reversals. Only survival terms can yield  
+time inconsistent preferences, or preference reversals. 
+
+%preference reversals are predicted from $\smallersooner\to
+%\largerlater$ as the age at dilemma increases.\begin{table}[h]
+%    \centering
+%\begin{tabular}{|l|l|}
+%    \hline
+%Survival Probability & Preference Reversals            \\ \hline \hline
+%Constant             & None                            \\
+%Increasing           & $\smallersooner\to\largerlater$ \\
+%Decreasing           & $\largerlater\to\smallersooner$ \\ \hline
+%\end{tabular}
+%\caption[Association between survival probability and type of preference reversals.]{Survival probability 
+%    determines whether preference reversals occur, and in which direction. Intuitively, if survival 
+%decreases with age, then individuals are less willing to wait for delayed rewards later in life than they are early on. For instance,
+%facing a smaller/sooner versus larger/later dilemma at age $25$, I may be willing to wait for the larger/later reward. At the age of
+%$85$, however, the risk inherent in waiting means I prefer the smaller/sooner option.}
+%\end{table}
 
 
 
@@ -673,16 +679,17 @@ $85$, however, the risk inherent in waiting means I prefer the smaller/sooner op
 
 
 \section{Application to Human Discounting}
-In \cite{gurven07}, an evolutionary life history is put forward for homo sapiens. By studying modern hunter/gatherer societies, Gurven and Kaplan 
-estimate survival and fecundity schedules for humans prior to the introduction of modern medicine, diet, and lifestyle. Specifically,
-the authors approximate hazard by a Siler function, taking the form
+Evolutionary life histories have been put forward for our own species, homo sapiens. By computing adaptive time preferences for homo spaiens' 
+evolutionary life history, we may better understand empirically observed time preferences. By studying modern hunter/gatherer societies, Gurven and Kaplan 
+estimate survival and fecundity schedules for humans prior to the introduction of modern medicine, diet, and lifestyle \cite{gurven07}. Specifically,
+the authors approximate survival probability as 
 \begin{equation}
-    h_a = \alpha_1 e^{-\beta_1 a} + \alpha_2 + \alpha_3 e^{\beta_3 a}, 
+    s_a = 1 - \alpha_1 e^{-\beta_1 a} + \alpha_2 + \alpha_3 e^{\beta_3 a}, 
     \label{eqn:siler}
 \end{equation}
-where $a$ is age measured in years. The corresponding survival function is then $s_a = 1 - h_a$. 
+where $a$ is age measured in years. 
 
-The Siler function accounts for elevated risk early in life, followed by a sustained
+The survival function used accounts for elevated risk early in life, followed by a sustained
 period of lower, constant risk, and finally steadily increasing risk late in life. By choosing the parameters $\alpha_j, \beta_k$ appropriately,
 Gurven and Kaplan closely approximate the life histories of modern hunter/gatherer societies which we take as a proxy for human
 evolutionary life history. From this life history, we derive time preferences from our adaptive discounting model. The life history 
@@ -724,17 +731,28 @@ draws nearer in the final third of the life history, patience diminishes and pre
 
 
 \section{Conclusion}
-We have herein presented a novel approach to computing discounting functions. 
-By starting from the hypothesis that selective pressures determine time preferences,
-we choose a measure of reproductive success and perform an adaptive dynamics analysis to conclude that evolutionarily stable time preferences are 
-determined by life history factors and account
-for both risk and opportunity cost. We exhibit that preference reversals, while often considered an irrationality, may in fact be an adaptive trait,
-so long as risk of death is not constant in age. 
+In this paper we allow an evolutionary process to determine 
+adaptive time preferences by performing an adaptive dynamics analysis. We use the Lyapunov exponent as 
+a measure of evolutionary fitness and consequently find that time preferences are determined by risk and opportunity cost, the latter
+measured by ambient population growth. Our findings show that time inconsistency in an evolutionarily adaptive trait, rather than an
+irrationality. 
 
-Our approach to adaptive dynamics does not make full use of the machinery available to us. Specifically, we assume that there is no competition between
-individuals, so that the trait substitution sequence amounts to an optimization procedure. An exciting area for future study is to model the 
-consequences of allowing an agent's likelihood of finding food to be determined not only by its own patience, but by the patience of
-its competitors as well. 
+Our work may be seen as a starting point to understand the evolutionary dynamics of patience and time preferences rather
+than a definitive conclusion. Our work may be extended easily by accounting for competition between individuals. For instance, perhaps
+delayed rewards are less likely to be realized when an individual is surrounded by more hasty competitors. 
+Preliminary exploration in this direction has found that competition induces less patience overall and still finds an evolutionarily stable
+set of time preferences. An interesting result would be to model a scenario in which competition leads to evolutionary branching and the emergence
+of diverse time preferences. 
+
+Our work on determining adaptive discounting functions is a step toward the reconciliation of the theory and practice of time preferences. As
+we discuss in the introduction, exponential discounting is rooted in mathematical models of behaviour, whereas hyperbolic discounting is supported
+by empirical literature. We bridge the gap between the two perspectives by providing a fresh biological perspective. 
+As a result, our model is capable of explaining the observed phenomena of hyperbolic discounting and preference
+reversals. 
+
+
+
+
 
 \newpage
 \bibliographystyle{alpha}
