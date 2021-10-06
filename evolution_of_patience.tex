@@ -43,6 +43,22 @@
 \patchcmd{\epigraph}{\@epitext{#1}}{\itshape\@epitext{#1}}{}{}
 \makeatother
 
+% Align and Lineno do not play well together. This should fix it:
+
+\newcommand*\linenomathpatch[1]{%
+  \cspreto{#1}{\linenomath}%
+  \cspreto{#1*}{\linenomath}%
+  \csappto{end#1}{\endlinenomath}%
+  \csappto{end#1*}{\endlinenomath}%
+}
+
+\linenomathpatch{equation}
+\linenomathpatch{gather}
+\linenomathpatch{multline}
+\linenomathpatch{align}
+\linenomathpatch{alignat}
+\linenomathpatch{flalign}
+
 
 
 %%%%%%%%%
@@ -228,9 +244,10 @@ the form:
 \begin{equation}
     \Delta_{\hyp}(t) = \frac{1}{1+ht},
 \end{equation}
-where $h>0$ is a parameter analogous to $r$ in the exponential discounting model. The hyperbolic discounting model is used considerably less
-than the exponential model, in part due to its lack of theoretical foundations. One derivation of the hyperbolic discounting model relies
-on additive, \textit{simple interest} computations, which in financial modelling is considered irrational \cite{rachlin06}. 
+where $h>0$ is a parameter analogous to $r$ in the exponential discounting model. The hyperbolic discounting model is considerably less
+popular than the exponential model, in part due to its lack of theoretical foundations. One derivation of the hyperbolic discounting model relies
+on additive, \textit{simple interest} computations, which in financial modelling is considered irrational \cite{rachlin06}. Of note is
+that preference reversals of the type observed by Read et al. are predicted by the hyperbolic discounting model. 
 
 
 \begin{figure}[H]
@@ -270,35 +287,31 @@ Every decision is a consequence of millions of years of selective pressures and 
 the set of mental processes we use when making decisions without conscious and deliberate consideration \cite{wegner02}. We start from the principle
 that time preferences are determined by the adaptive unconscious,
 which favours decisions aiding reproductive success. 
-We may therefore conclude that individuals' instinctive time preferences are determined by an adaptive discounting function, which we denote
-\begin{equation}
-    \Delta^*(t).
-    \label{eqn:adaptive_discounting}
-\end{equation}
+We may therefore conclude that individuals' instinctive time preferences are described by an adaptive discounting function, which we denote
+$\Delta^*(t)$.
 
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale = 0.8]{discountedValueHyperbolic.png}
-    \includegraphics[scale = 0.8]{discountedValueExponential.png}
-    \caption[Graphical depiction of a preference reversal.]{Preference reversals are predicted by hyperbolic discounting. Consider a hyperbolic ($h = 1$) and exponential ($r = 1$) discounter. 
-       Suppose an agent
-    decides between $\smallersooner$: [1 after delay $t$] and $\largerlater$: [1.5 at delay $t+1$]. The figure shows the discounted value
-    of each alternative. The hyperbolic discounter prefers the smaller/sooner option if and only if the common delay $t < 1$. 
-    Since the exponential discounter's curves never cross, they always prefer $\smallersooner$. }
+%    \includegraphics[scale = 0.8]{discountedValueExponential.png}
+    \caption[Graphical depiction of a preference reversal.]{Preference reversals are predicted by hyperbolic discounting. Consider a hyperbolic ($h = 1$) 
+        discounter 
+       deciding between $\smallersooner$: [1 after delay $t$] and $\largerlater$: [1.5 after delay $t+1$]. The figure shows the discounted value
+    of each alternative. The hyperbolic discounter prefers the smaller/sooner option if and only if the common delay $t < 1$. }
 \end{figure}
 
 Our work focuses on determining adaptive time preferences, following in the footsteps of previous research which reasons on evolutionary
 lines. A common approach is to explicitly account for risk and/or opportunity cost when computing the relative value of immediate and delayed
 rewards. Risk refers to the possibility that a delayed reward may not be realized, whereas opportunity cost references the principle that
-time is valuable: delayed rewards are instinsically worth less than immediate rewards even in the absence of risk. 
+time is valuable: delayed rewards are intrinsically worth less than immediate rewards even in the absence of risk. 
 Previous work has shown that individuals best adapted
 to a constant, known risk will discount exponentially, whereas if risk is uncertain, non-exponential (and in particular,
 hyperbolic) discounting may be optimal \cite{sozou98}. By explicitly accounting for opportunity cost, one can derive models of constant
 risk in which non-exponential discounting and preference reversals are adaptive \cite{fawcett12}.
 Our work herein complements the work of both Fawcett et al. and Sozou by 
 explaining time preferences through risk adaptation, showing that preference reversals
-are a natural, adaptive consequence of non-constant risk. 
+are a natural, adaptive consequence of age dependent survival probability. 
 
 \section{Life Histories and Reproductive Success}
 
@@ -336,22 +349,22 @@ appears in the discrete-time Euler-Lotka equation,
 
 
 Whereas the expression for $R_0$ is easily computed, the Euler-Lotka equation
-is a polynomial in $\lambda$ of degree $A+1$, and so has up to $A+1$ distinct solutions. The largest of these solutions gives the growth
+is a polynomial in $\lambda$ of degree $A+1$, and so has up to $A+1$ distinct solutions. The largest of these solutions is the growth
 rate of a monomorphic population, the Lyapunov exponent.
 The Euler-Lotka equation is derived from the Leslie matrix describing population dynamics with life history $\LH_0$ \cite{stearns92}.
 While it is not possible to compute analytically, the Lyapunov exponent is implicitly a function of life history data:
 \begin{equation}
-    \lambda = \lambda(\LH_0) = \lambda(b_0, b_1, \ldots, b_{A}, s_0, s_1, \ldots, s_{A-1}).
+    \lambda = \lambda(\LH_0) = \lambda(s_0, s_1, \ldots, s_{A-1}, b_0, b_1, \ldots, b_{A}).
     \label{eqn:lambda_function}
 \end{equation}
 In practice, the Lyapunov exponent is computed numerically, and in each expression, the empty product evaluates to $1$. 
 In the long run, a population with fixed life history will converge to a stable age distribution and
 thus grow (or decay) 
-exponentially at a constant rate $\lambda$ per unit time. If $\lambda = 1$, then the population remains at a constant size indefinitely.
+exponentially at a constant rate $\lambda$ per unit time. If $\lambda = 1$, then the population remains at a fixed size indefinitely.
 
 We use population growth $\lambda$ as our measure of reproductive success. The assumption that populations grow exponentially is limiting: if
 ever $\lambda > 1$,  we implicitly assume that resources are in inexhaustible supply 
-and do not limit growth. A sustainable population is one that is of constant size, which has
+and do not constrain growth. A sustainable population is one that is of constant size, which has
 $\lambda \approx 1$. The question is now: What selective pressures does $\lambda$ 
 exert over time preferences?
 
@@ -373,7 +386,7 @@ Individuals decide between:
     \item $\largerlater:$ increase $b_{a+1}\uparrow b_{a+1} + F\cdot \varepsilon$.
 \end{enumerate}
 
-We use $\varepsilon > 0$ as our unit of fecundity dilemma, since we assume environmental stochasticity results in relatively small changes to 
+We use $\varepsilon > 0$ (small) as our unit of fecundity dilemma, assuming environmental stochasticity results in relatively minor changes to 
 fecundity. 
 Denote each dilemma by the pair $(a, F)$, where $a$ is the age at which the dilemma is faced,
 and $F$ is the ratio of $\largerlater$ to $\smallersooner$. 
@@ -406,8 +419,8 @@ specified by either a patience threshold or a discounting function.
         Every point in $(a, F)$ space
     represents a dilemma at age $a$ with reward ratio $\largerlater : \smallersooner = F$. 
     Those points above the patience threshold correspond to dilemmas at which the $\largerlater$ alternative
-is preferred. Those points below the threshold are when $\smallersooner$ is preferred. The patience threshold therefore also allows
-us to visualize preference reversals. Consider the family of dilemmas $(a, 1.5)$, with age at dilemma $a$ variable (dotted black line). If the dilemma comes 
+is preferred. Those points below the threshold are when $\smallersooner$ is preferred. The patience threshold also allows
+illustrates preference reversals. Consider the family of dilemmas $(a, 1.5)$, with age at dilemma $a$ variable (dotted black line). If the dilemma comes 
 before age $a = 1$, the agent 
 prefers $\smallersooner$. However, if the dilemma comes later in life, then $\largerlater$ is preferred. More generally, a
 downward sloping patience threshold indicates preference reversals from $\smallersooner\to\largerlater$, and an upward sloping threshold
@@ -425,7 +438,7 @@ preferences and patience.
 
 \section{Adaptive Dynamics of Patience}
 Adaptive dynamics is a framework for mathematically describing the trajectory of a continuosly varying trait when subject to evolutionary pressures. 
-Adaptive dynamics makes two key assumptions. First, we assume that mutations are small. Second, mutations occur infrequently.
+Adaptive dynamics makes two key assumptions. We assume that mutations (i) are small, and (ii) occur infrequently.
 Under these assumptions, a mutant either goes extinct or replaces the resident population before any more mutations occur \cite{doebeli05}.
 A value to which a trait converges is called convergent stable. A value to which a trait remains if already there is called evolutionarily stable.
 Neither form of stability implies the other. For instance, a trait value which is convergent stable and not evolutionarily stable is called an
@@ -455,7 +468,7 @@ with trait values above and the other below $x^*$.  We here apply adaptive dynam
 
 Suppose a population has baseline life history $\LH_0$ and begins with all individuals having the same time preferences,
 encoded as a patience threshold $(x_0, x_1, \ldots, x_{A-1})$. We compute the adaptive dynamics of each switching point
-$x_a$ independently. Therefore, we consider a mutant with switching point $y_a > x_a$ arising in a monomorphic population with switching point $x_a$.  
+$x_a$ independently. We first consider a mutant with switching point $y_a > x_a$ for age at dilemma $a$ fixed. 
 The mutant under consideration is slightly less patient than the resident population. Residents and mutants obtain identical outcomes except for dilemmas
 at age $a$ with ratio $F$ such that $x_a < F < y_a$, meaning residents choose $\largerlater$ and mutants choose $\smallersooner$. 
 To determine if the mutant with trait value $y_a$ is benefited, we analytically compute reproductive success via a first order Taylor approximation:
@@ -475,7 +488,7 @@ varies as a function of $F$, whereas the smaller/sooner payout is constant. We h
 Invasion fitness describes the relative success of a rare mutant, and is the difference in reproductive success between
 a mutant and residents.  We assume dilemmas
 vary stochastically, so invasion fitness is the \textit{average} difference in success. Suppose the larger/later value $F$ is distributed with probability
-density function $g_a(F)$. 
+density function $g(F)$. 
 Denote by $\varphi_a(y_a, x_a)$ the invasion fitness of a mutant with switching point
 $y_a$ into a resident population with switching point $x_a$.  
 Recall that when $x_a < F < y_a$, residents choose the larger/later option and mutants prefer the smaller/sooner alternative, whereas
@@ -484,7 +497,7 @@ over all dilemmas $(a, F)$, for $a$ fixed.
 Mathematically, therefore, invasion fitness is given by 
 \begin{align}
     \varphi_a(y_a, x_a) &= \mathbb{E}\left[ \pi_{\smallersooner} - \pi_{\largerlater}(F) \ | \ x_a < F < y_a\right] \\
-    &= \int_{x_a}^{y_a} \left[ \pi_{\smallersooner} - \pi_{\largerlater}(F) \right]g_a(F) \d F. 
+    &= \int_{x_a}^{y_a} \left[ \pi_{\smallersooner} - \pi_{\largerlater}(F) \right]g(F) \d F. 
 \end{align}
 Remark that the expression for invasion fitness
 $\varphi_a$ is the same whether $x_a < y_a$ or $y_a < x_a$, and is $0$ when $x_a = y_a$. 
@@ -501,7 +514,7 @@ Recall that increasing the switching point $x_a$ is adaptive if and only if $D(x
 \end{align}
 We verify that $D(x_a^*) = 0$ is solved whenever the payout from choosing smaller/sooner equals that from choosing larger/later,
 $\pi_{\smallersooner} = \pi_{\largerlater}(x_a^*)$. Intuitively, this result is reasonable: the singular switching point 
-stable is the one at which the payout from smaller/sooner is the same as that from larger/later. 
+is the one at which the payout from smaller/sooner is the same as that from larger/later. 
 We compute from equations (\ref{eqn:varss}) and (\ref{eqn:varll}) that
 $x_a^* =  \varSS/\varLL$. 
 
@@ -564,14 +577,14 @@ We further compute the adaptive discounting function
 \section{Interpretation and Discussion}
 
 The discounting function $\Delta^*(a)$ is derived from allowing an evolutionary process to determine time preferences. The only assumption
-we have made is that the Lyapunov exponent, or monomorphic population growth rate, corresponds to evolutionary fitness. By studying
+we make is that the Lyapunov exponent, or monomorphic population growth rate, corresponds to evolutionary fitness. By studying
 the functional form of the adaptive discounting function $\Delta^*(a)$, we infer that there are two distinct evolutionary pressures to prefer
-immediate to delayed rewards. It is adaptive to prefer immediate rewards over delayed rewards due to both
+immediate over delayed rewards. It is adaptive to prefer immediate rewards over delayed rewards due to both
 risk of death and opportunity cost (that is, delayed rewards are intrinsically worth less). Our assumptions do not contradict those
 of the exponential discounting model: while an environment may present constant risk, we allow individuals inside of that environment to experience
 risk differently dependent on age. 
 
-The mathematics in the previous section does not rely on the Lyapunov exponent $\lambda$ until it is used
+The mathematics in the previous section do not rely on the Lyapunov exponent $\lambda$ until it is used
 explicitly to compute $\Delta^*(a)$. We could therefore
 run through the same argument to produce a discounting function resulting from lifetime reproductive output $R_0$ as our measure of success. In this
 case, 
@@ -667,12 +680,15 @@ time inconsistent preferences, or preference reversals.
     \centering
     \includegraphics[scale = 0.8]{growth_dependence.png}
     \includegraphics[scale = 0.8]{switching_point_growth.png}
-    \caption[Appreciation and preference plots for different demographic trends.]{We compute adaptive time preferences for three basline life histories. In all cases, survival probability is chosen to 
+    \caption[Appreciation and preference plots for different demographic trends.]{We compute adaptive time preferences for three basline life histories
+    and represent each with an appreciation plot (a), (b), and (c) and a patience threshold (d). In all cases, survival probability is chosen to 
         produce hyperbolic discounting: $\Delta^*(a) = \lambda^{-a}\frac{1}{1+a}$. 
-        Left: if a population grows at rate $\lambda = 6/5$ per unit time, appreciation looks exponential.
-        Centre: If $\lambda = 1$, the population is stable in size, and appreciation looks linear, indicative of hyperbolic discounting. Right:
-        If the population decays at rate $\lambda = 5/6$, inverted time preferences are adaptive, meaning delayed rewards may be valued more than
-        more immediate alternatives. Bottom: The patience threshold is decreasing and the same shape for all values of $\lambda$. Preference reversals
+        In (a), if a population grows at rate $\lambda = 6/5$ per unit time, appreciation looks exponential.
+        In (b), if $\lambda = 1$, the population is stable in size, and appreciation looks linear, indicative of hyperbolic discounting. Next, in
+        (c),
+        if the population decays at rate $\lambda = 5/6$, inverted time preferences are adaptive, meaning delayed rewards may be valued more than
+        immediate alternatives. In plot (d) the same time preferences are represented as in (a), (b), and (c) using patience thresholds.
+        The patience threshold is decreasing and the same shape for all values of $\lambda$. Preference reversals
     from smaller/sooner to larger/later are adaptive.}
 \end{figure}
 \newpage
@@ -701,10 +717,14 @@ In between these two periods is a lengthy stretch during which discounting looks
 \begin{figure}[h]
     \centering
     \includegraphics{evolved_preference_plot.png}
-    \caption[Induced time preferences from an average evolutionary life history.]{Gurven and Kaplan \cite{gurven07} approximate homo sapiens evolutionary life history for modern hunter/gatherer societies. 
-    We illustrate the evolutionarily stable time preferences resulting from the life history approximation for the Hadza society. Early in life,
-preference reversals are predicted from smaller/sooner to larger/later. In mid-life, time preferences look approximately exponential. As death
-draws nearer in the final third of the life history, patience diminishes and preference reversals are predicted from larger/later to smaller/sooner.}
+    \caption[Induced time preferences from an average evolutionary life history.]{A survival schedule  $(s_0, s_1, \ldots, s_{79})$
+        has been estimated for homo sapiens prior to the introduction of modern medicine and lifestyle \cite{gurven07}. We leverage
+        the survival function they provide for the Hadza hunter/gatherer society to compute the evolutionarily stable patience 
+        threshold $(x_0^*, x_1^*, \ldots, x_{79}^*)$. Preference reversals are indicated by this patience threshold.  
+        Early in life,
+        preference reversals are predicted from smaller/sooner to larger/later. In mid-life, time preferences look approximately exponential. As death
+        draws nearer in the final third of the life history, patience diminishes and preference reversals are predicted from larger/later 
+        to smaller/sooner.}
 \end{figure}
 
 
@@ -738,17 +758,18 @@ measured by ambient population growth. Our findings show that time inconsistency
 irrationality. 
 
 Our work may be seen as a starting point to understand the evolutionary dynamics of patience and time preferences rather
-than a definitive conclusion. Our work may be extended easily by accounting for competition between individuals. For instance, perhaps
+than a definitive conclusion. Our work may be extended by accounting for competition between individuals. For instance, perhaps
 delayed rewards are less likely to be realized when an individual is surrounded by more hasty competitors. 
 Preliminary exploration in this direction has found that competition induces less patience overall and still finds an evolutionarily stable
 set of time preferences. An interesting result would be to model a scenario in which competition leads to evolutionary branching and the emergence
 of diverse time preferences. 
 
-Our work on determining adaptive discounting functions is a step toward the reconciliation of the theory and practice of time preferences. As
-we discuss in the introduction, exponential discounting is rooted in mathematical models of behaviour, whereas hyperbolic discounting is supported
-by empirical literature. We bridge the gap between the two perspectives by providing a fresh biological perspective. 
-As a result, our model is capable of explaining the observed phenomena of hyperbolic discounting and preference
+Our work on determining adaptive discounting functions is a step toward the reconciliation of the theory and practice of time preferences. 
+We have put forward a purely theoretical model capable of explaining the observed phenomena of hyperbolic discounting and preference
 reversals. 
+As
+we discuss in the introduction, exponential discounting is rooted in mathematical models of behaviour, whereas hyperbolic discounting is supported
+by empirical literature. We bridge the gap between the two perspectives by providing a fresh evolutionary angle. 
 
 
 
