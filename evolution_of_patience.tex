@@ -198,48 +198,47 @@ converges. Our results imply that individual survival probability and ambient po
 \linenumbers
 \section{Introduction}
 
+Individuals often make decisions with delayed consequences. For instance, consider deciding between chocolate and fruit salad
+for desert. While chocolate offers immediate satisfaction, fruit salad provides more health benefits which are felt later in time. 
+Dilemmas between small, more immediate rewards and larger, more delayed rewards are typical. 
+At the personal level, examples include decisions involving diet, exercise, or the management of addictions. At a more global scale, 
+environmental policy (to reduce output in the present to preserve resources for future use) also involves a temporal dilemma between
+a smaller/sooner and larger/later benefit. 
 
-Individuals regularly make decisions with delayed consequences. 
-Common examples include choice of diet and 
-exercise, the management of addictions, and environmental stewardship.
-One concrete decision in the case of diet is if one chooses between eating a chocolate bar and a fruit salad for desert. 
-In general, large rewards are preferred to smaller alternatives. At the same time, 
-individuals are impatient, preferring rewards which come more immediately.
+An individual's \textit{time preferences} describe their decision facing any potential temporal dilemma. Time preferences are
+quantitatively described using a discounting function $\Delta$, encoding how quickly a delayed reward loses its value. Suppose a specific individual
+values the satisfaction of chocolate at $1$, whereas they value the health benefits provided by fruit salad at $1.5$. 
+If the health benefits of fruit salad were available immediately, the individual under consideration would prefer fruit salad. However, 
+since health benefits come after a delay (which we normalize to 1, for simplicity), whether the individual prefers chocolate or fruit 
+is determined by their time preferences.
+Mathematically, fruit salad is preferred if and only if
+\begin{align}
+    \text{Benefit of Chocolate} &< (\text{Discount Factor}) \cdot (\text{Benefit of Fruit}) \\
+    \iff 1 &< \Delta(1) \cdot 1.5
+    \label{eqn:choco_or_fruit}
+\end{align}
+Many studies have considered why (in theory) and how (in practice) individuals value time \cite{mazur85, ainslie75, green81, green04}. 
+Correspondingly, specific discounting functions can be derived from mathematical models or instead configured to match experimental data. 
 
-A temporal dilemma is any decision in which an agent's preferences for immediacy and larger rewards are in opposition. 
-An individual's \textit{time preferences} describe their decision facing any potential temporal dilemma. 
-Discounting functions are used to study time preferences mathematically, quantitatively describing the relationship between delay to 
-reward and perceived value. 
-For time preferences described by discounting function $\Delta$, 
-a reward to be received after delay $t$ maintains a fraction $\Delta(t)\in(0, 1)$ of its nominal value. Naturally, immediately received
-rewards are not discounted , so that $\Delta(0) = 1$. 
-
-In the case of choice of desert, a chocolate bar represents a small, immediate benefit, whereas the healthier option of
-fruit salad is a larger, albeit more delayed reward. Each individual's time preferences determine whether they are patient
-or not. 
-Many studies
-have considered why (in theory) and how (in practice) individuals value time \cite{mazur85, ainslie75, green81, green04}. 
-Correspondingly, discounting functions
-can be derived from mathematical models or from experimental data. 
 
 Consider a simple model of time preferences.
-Assume that delayed rewards lose a constant fraction of their value for every unit-time delay. Intuitively, this assumption is appealing,
-and agrees with financial models of loans in which an interest rate is specified and a delayed reward is discounted exponentially
-to present value using the expression:
+Assume that delayed rewards lose a constant fraction of their value for every unit-time delay. This assumption 
+results in an exponential discounting function, of the form
 \begin{equation}
     \Delta_{\exp}(t) = e^{-r t}.
 \end{equation}
-Here, $r>0$ is a parameter indicating how quickly a reward loses its value. The exponential discounting model is popular among economists in particular
+Here, $r>0$ is a parameter indicating how quickly a reward loses its value. 
+The exponential discounting model is popular among economists in particular
 for its straightforward assumptions and ease of use \cite{sozou98}. 
-
-Experimentalists find evidence of behaviour not permissible in the exponential discounting model \cite{read98}. 
-Specifically, Read et al. find that
-when deciding between a snack of chocolate and fruit, the delay before consumption has a significant effect on choice. Concretely, study participants
-prefer a chocolate bar
-when they will consume immediately, but prefer fruit salad if they are to snack after a week. This switch from impulsiveness to patience as
-the consequences become further removed is called a preference reversal. 
-Notably, exponential discounting is the only model of time preferences which does not predict preference reversals
-\cite{strotz55}. 
+In particular, the model 
+agrees with financial models in which loans accrue compound interest at a specified rate $r>0$. An initial loan of $P$ at compound interest
+rate $r$ appreciates (after $t$ units of time) to 
+\begin{equation}
+    P(1 + r)^{t} = Pe^{\log(1+r) t} = Pe^{\tilde{r}t},
+    \label{eqn:compound_interest}
+\end{equation}
+which grows exponentially in time $t$. 
+Appreciation is the reciprocal of discounting, and either may be used depending on which more naturally suits our application. 
 
 
 Experimental results find that observed discounting behaviour is better explained
@@ -250,20 +249,51 @@ the form:
 \end{equation}
 where $h>0$ is a parameter analogous to $r$ in the exponential discounting model. The hyperbolic discounting model is considerably less
 popular than the exponential model, in part due to its lack of theoretical foundations. One derivation of the hyperbolic discounting model relies
-on additive, \textit{simple interest} computations, which in financial modelling is considered irrational \cite{rachlin06}. Of note is
-that preference reversals of the type observed by Read et al. are predicted by the hyperbolic discounting model. 
-
+on additive, \textit{simple interest} computations, which in financial modelling is considered irrational \cite{rachlin06}. An initial loan
+of $P$ at simple interest rate $h$ appreciates after $t$ units of time to
+\begin{equation}
+    P + hP + hP + \cdots + hP = P(1 + ht)
+    \label{eqn:simple_interest}
+\end{equation}
+which grows linearly in time $t$. 
 
 \begin{figure}[H]
     \centering
     \includegraphics{discounting_appreciation.png}
     \caption[Example discounting and corresponding appreciation schedules.]{Discounting versus appreciation in delayed rewards. 
-        In figure (a), we see the discounted value of a reward of magnitude $1$ plotted as a function of delay $t$. In figure 
-        (b), we plot the same time preferences via appreciation, which is the reciprocal of discounting. An immediate reward of size $1$ is
+        (a): the discounted value of a reward of magnitude $1$ plotted as a function of delay $t$.  
+        (b): the same time preferences represented with appreciation, which is the reciprocal of discounting. An immediate reward of size $1$ is
         of the same perceived value as a reward of size $1/\Delta(t)$ received after delay $t$. 
         Hyperbolic and exponential time preferences are more easily distinguished by appreciation, rather than discounting, plots.
-Exponential discounters exhibit exponential
+        Exponential discounters exhibit exponential
         growth in appreciation, whereas hyperbolic discounting is consistent with linear growth.}
+\end{figure}
+
+
+
+Experimentalists further find evidence of behaviour not compatible with the exponential discounting model \cite{read98}. 
+When deciding between a snack of chocolate and fruit, varying the delay before consumption can change preferences;
+some study participants prefer a chocolate bar
+when they will consume immediately, but prefer fruit salad if they are to snack after a week. To switch from impulsiveness (chocolate) to patience
+(fruit) as
+both alternatives become further removed is called a preference reversal. A preference reversal of this nature is shown in Figure 
+\ref{fig:discountedValueHyperbolic}.
+Notably, exponential discounting is the only model of time preferences which does not predict preference reversals
+\cite{strotz55}. 
+
+
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.7]{discountedValueHyperbolic.png}
+    \caption[Graphical depiction of a preference reversal.]{Preference reversals are predicted by hyperbolic discounting. Suppose an individual
+        chooses between a desert of either chocolate
+        or fruit salad, to be consumed after some common delay $t$. As in the text,
+        chocolate has a value of $1$ and fruit has a value of $1.5$ (received after an additional delay of one unit of time). 
+        The figure shows the discounted value
+        of each alternative by a hyperbolic discounter ($h = 1$): chocolate is preferred if and only if the common delay $t < 1$. }
+    \label{fig:discountedValueHyperbolic}
 \end{figure}
 
 
@@ -284,6 +314,8 @@ Exponential discounters exhibit exponential
 %        
 %       \end{figure}
 
+Our work herein focuses on the reconciliation of the theory and practice of time preferences. 
+
 Decisions involving patience are made by both human and non-human animals. Squirrels saving nuts for winter and bird which build elaborate nests
 both exhibit patience, investing time and energy in a delayed reward. While researchers may quantify any set of time preferences using
 some discounting function, the individuals being studied rarely make decisions by computing via a discounting function. 
@@ -295,15 +327,6 @@ We may therefore conclude that individuals' instinctive time preferences are des
 $\Delta^*(t)$.
 
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale = 0.8]{discountedValueHyperbolic.png}
-%    \includegraphics[scale = 0.8]{discountedValueExponential.png}
-    \caption[Graphical depiction of a preference reversal.]{Preference reversals are predicted by hyperbolic discounting. Consider a hyperbolic ($h = 1$) 
-        discounter 
-       deciding between $\smallersooner$: [1 after delay $t$] and $\largerlater$: [1.5 after delay $t+1$]. The figure shows the discounted value
-    of each alternative. The hyperbolic discounter prefers the smaller/sooner option if and only if the common delay $t < 1$. }
-\end{figure}
 
 Our work focuses on determining adaptive time preferences, following in the footsteps of previous research which reasons on evolutionary
 lines. A common approach is to explicitly account for risk and/or opportunity cost when computing the relative value of immediate and delayed
