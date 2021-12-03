@@ -297,48 +297,38 @@ Notably, exponential discounting is the only model of time preferences which doe
 \end{figure}
 
 
-%\begin{figure}[h]
-%    \centering
-%    \includegraphics[scale = 0.8]{present_value_pref_rev.png}
-%    \includegraphics[scale = 0.8]{switching_point_pref_rev.png}
-%    \caption{Preference reversals are inconsistent with models of exponential discounting, but are predicted by hyperbolic discounting. To illustrate,
-%        consider both a hyperbolic discounter $\Delta_{\hyp}(t) = 1/(1+t)$ and exponential discounter $\Delta_{\exp}(t) = e^{-t}$ facing
-%        dilemma $(t, F = 1.5)$, with time at dilemma $t$ variable. Top: the discounted value of smaller/sooner and larger/later at 
-%        time at dilemma $t$. The hyperbolic discounter prefers the smaller/sooner option 
-%        if and only if time at dilemma $t<1$. Bottom: each
-%        point in $(t, F)$ space represents a dilemma, with the horizontal dotted line being all dilemmas $(t, F = 1.5)$. We plot
-%        the patience threshold for a hyperbolic and exponential discounter; the smaller/sooner alternative is preferred if and only if
-%        the black dotted line is below the patience threshold. Facing dilemma $(t, F=1.5)$, the hyperbolic discounter prefers the smaller/sooner
-%        alternative if and only if $t < 1$. On the other hand, the exponential discounter's patience threshold is horizontal and 
-%        never intersects the dotted line, resulting in no preference reversals.}
-%        
-%       \end{figure}
+We propose to use techniques from evolutionary modeling to resolve the discrepency between the theory and the reality of time preferences.
+Of note, all discounting examples until present have involved humans; this need not be the case. Decisions involving patience are made by both
+human and non-human animals \cite{fawcett12}. While researchers, accountants, and financial engineers may quantify time preferences using
+discounting functions, most smaller/sooner or larger/later decisions are guided by intuition rather than mathematics. The intuition determining
+time preferences has been called the \textit{adaptive unconscious}, which is the collection of mental processes we use when making 
+decisions without conscious and deliberate consideration \cite{wegner02}. The adaptive unconscious is adaptive in that it favours behaviour
+aiding survival and reproductive success. Those offspring born with better instincts are more likely to survive/reproduce, so that in the long
+run, those with adaptive instincts dominate. Our core assumption throughout this article is that time preferences are determined by the adaptive
+unconscious. We perform evolutionary modeling to determine instinctive time preferences described by an adaptive discounting function, which
+we denote $\Delta^*$. 
 
-Our work herein focuses on the reconciliation of the theory and practice of time preferences. 
+Our research is not the first to focus on time preferences from an evolutionary angle. Previous approaches explicitly consider both
+risk and opportunity cost to compute the relative value of immediate and delayed rewards, prescribing adaptive behaviour as a function of
+each \cite{sozou98, fawcett12}. Risk refers to the possibility that a delayed reward may not be realized (due, for instance, to death
+of the recipient), whereas opportunity cost 
+references the principle that
+time is valuable: delayed rewards are intrinsically worth less than immediate rewards even in the absence of risk.
+If risk is constant and known, adaptive time preferences are modeled by exponential discounting; however, if risk is constant but drawn
+from a known distribution, hyperbolic discounting may be adaptive \cite{sozou98}. If risk is constant, explicitly accounting for opportunity
+cost yields various models predicting preference reversals \cite{fawcett12}.  
 
-Decisions involving patience are made by both human and non-human animals. Squirrels saving nuts for winter and bird which build elaborate nests
-both exhibit patience, investing time and energy in a delayed reward. While researchers may quantify any set of time preferences using
-some discounting function, the individuals being studied rarely make decisions by computing via a discounting function. 
-Every decision is a consequence of millions of years of selective pressures and evolution. The \textit{adaptive unconscious} is 
-the set of mental processes we use when making decisions without conscious and deliberate consideration \cite{wegner02}. We start from the principle
-that time preferences are determined by the adaptive unconscious,
-which favours decisions aiding reproductive success. 
-We may therefore conclude that individuals' instinctive time preferences are described by an adaptive discounting function, which we denote
-$\Delta^*(t)$.
+A consistent approach to the application of evolutionary modeling to time preferences is to assume that delayed rewards 
+translate directly to fitness outcomes. In this article, we add an intermediate step, considering rewards in units of future offspring which we 
+subsequently convert to a fitness measurement. Consequently, the relative value of delayed rewards is not determined by subjective and debatable
+evaluations of risk or opportunity cost, but instead mechanistically determined by the choice of fitness measurement. 
+The demographic factors survival and ambient population growth determine risk and opportunity cost, respectively. 
+Our contribution is to put forward a model making less assumptions and which reinforces the core hypotheses in previous research. We apply
+our model to a highly general demographic setting in which we derive time preferences corresponding to any risk and reward profile. Finally,
+we apply our approach to better understand preference reversals and reconcile the theory and empirics of discounting. 
 
 
 
-Our work focuses on determining adaptive time preferences, following in the footsteps of previous research which reasons on evolutionary
-lines. A common approach is to explicitly account for risk and/or opportunity cost when computing the relative value of immediate and delayed
-rewards. Risk refers to the possibility that a delayed reward may not be realized, whereas opportunity cost references the principle that
-time is valuable: delayed rewards are intrinsically worth less than immediate rewards even in the absence of risk. 
-Previous work has shown that individuals best adapted
-to a constant, known risk will discount exponentially, whereas if risk is uncertain, non-exponential (and in particular,
-hyperbolic) discounting may be optimal \cite{sozou98}. By explicitly accounting for opportunity cost, one can derive models of constant
-risk in which non-exponential discounting and preference reversals are adaptive \cite{fawcett12}.
-Our work herein complements the work of both Fawcett et al. and Sozou by 
-explaining time preferences through risk adaptation, showing that preference reversals
-are a natural, adaptive consequence of age dependent survival probability. 
 
 \section{Life Histories and Reproductive Success}
 
