@@ -198,36 +198,37 @@ converges. Our results imply that individual survival probability and ambient po
 \linenumbers
 \section{Introduction}
 
-Individuals often make decisions with delayed consequences. For instance, consider deciding between chocolate and fruit salad
-for desert. While chocolate offers immediate satisfaction, fruit salad provides more health benefits which are felt later in time. 
-Dilemmas between small, more immediate rewards and larger, more delayed rewards are typical. 
-At the personal level, examples include decisions involving diet, exercise, or the management of addictions. At a more global scale, 
-environmental policy (to reduce output in the present to preserve resources for future use) also involves a temporal dilemma between
-a smaller/sooner and larger/later benefit. 
+Decisions often have delayed consequences. Consider a choice between chocolate and fruit salad.
+While chocolate offers immediate satisfaction, fruit salad provides health benefits enjoyed later in time. 
+More generally, diet, exercise, and the management of addictions all involve weighing the benefits of a small, immediate 
+reward as compared with a larger, more delayed alternative. 
+Intertemporal choices are not only made by individuals. For instance,  
+environmental policy dictates whether to reduce exploitation in the present to preserve resources for future use. 
 
-An individual's \textit{time preferences} describe their decision facing any potential temporal dilemma. Time preferences are
-quantitatively described using a discounting function $\Delta$, encoding how quickly a delayed reward loses its value. Suppose a specific individual
-values the satisfaction of chocolate at $1$, whereas they value the health benefits provided by fruit salad at $1.5$. 
-If the health benefits of fruit salad were available immediately, the individual under consideration would prefer fruit salad. However, 
-since health benefits come after a delay (which we normalize to 1, for simplicity), whether the individual prefers chocolate or fruit 
-is determined by their time preferences.
+
+
+
+
+Time preferences describe an agent's willingness to wait for a delayed reward in the presence of more immediate alternatives. 
+A discounting function $\Delta$ quantitatively encodes time preferences: a reward received at delay $t\ge0$ maintains a fraction
+$\Delta(t)$ of its value. Naturally, $\Delta(0) = 1$ and $\Delta$ is normally decreasing in $t$. 
+As a concrete example, suppose chocolate provides benefit $1$ at delay $0$, whereas fruit salad provides benefit $2$ at delay $10$. 
 Mathematically, fruit salad is preferred if and only if
 \begin{align}
     \text{Benefit of Chocolate} &< (\text{Discount Factor}) \cdot (\text{Benefit of Fruit}) \\
-    \iff 1 &< \Delta(1) \cdot 1.5
+    \iff 1 &< \Delta(10) \cdot 2
     \label{eqn:choco_or_fruit}
 \end{align}
 Many studies have considered why (in theory) and how (in practice) individuals value time \cite{mazur85, ainslie75, green81, green04}. 
 Correspondingly, specific discounting functions can be derived from mathematical models or instead configured to match experimental data. 
 
 
-Consider a simple model of time preferences.
-Assume that delayed rewards lose a constant fraction of their value for every unit-time delay. This assumption 
-results in an exponential discounting function, of the form
+If delayed rewards lose a constant fraction of their value for every unit-time delay, then discounting is exponential. The exponential
+discounting function is of the form
 \begin{equation}
-    \Delta_{\exp}(t) = e^{-r t}.
+    \Delta_{\exp}(t) = e^{-r t}
 \end{equation}
-Here, $r>0$ is a parameter indicating how quickly a reward loses its value. 
+where $r>0$ is a parameter indicating how quickly a reward loses its value. 
 The exponential discounting model is popular among economists in particular
 for its straightforward assumptions and ease of use \cite{sozou98}. 
 In particular, the model 
@@ -237,25 +238,26 @@ rate $r$ appreciates (after $t$ units of time) to
     P(1 + r)^{t} = Pe^{\log(1+r) t} = Pe^{\tilde{r}t},
     \label{eqn:compound_interest}
 \end{equation}
-which grows exponentially in time $t$. 
-Appreciation is the reciprocal of discounting, and either may be used depending on which more naturally suits our application. 
+which grows (or appreciates) exponentially in time $t$. 
+Appreciation is the reciprocal of discounting, and either may be used to describe time preferences depending on which more naturally suits our application. 
 
 
-Experimental results find that observed discounting behaviour is better explained
+Some experimental results find that observed discounting behaviour is better explained
 by a hyperbolic, rather than exponential, discounting function \cite{maia09, green04, doyle12}. A hyperbolic discounting function takes
-the form:
+the form
 \begin{equation}
     \Delta_{\hyp}(t) = \frac{1}{1+ht},
 \end{equation}
 where $h>0$ is a parameter analogous to $r$ in the exponential discounting model. The hyperbolic discounting model is considerably less
-popular than the exponential model, in part due to its lack of theoretical foundations. One derivation of the hyperbolic discounting model relies
+popular than the exponential model, in part due to its lack of theoretical foundations \cite{sozou98}. 
+One derivation of the hyperbolic discounting model relies
 on additive, \textit{simple interest} computations, which in financial modelling is considered irrational \cite{rachlin06}. An initial loan
 of $P$ at simple interest rate $h$ appreciates after $t$ units of time to
 \begin{equation}
     P + hP + hP + \cdots + hP = P(1 + ht)
     \label{eqn:simple_interest}
 \end{equation}
-which grows linearly in time $t$. 
+which grows linearly in time $t$. Figure \ref{fig:discounting_appreciation} graphically depicts both the exponential and hyperbolic discounting models. 
 
 \begin{figure}[H]
     \centering
@@ -267,14 +269,15 @@ which grows linearly in time $t$.
         Hyperbolic and exponential time preferences are more easily distinguished by appreciation, rather than discounting, plots.
         Exponential discounters exhibit exponential
         growth in appreciation, whereas hyperbolic discounting is consistent with linear growth.}
+        \label{fig:discounting_appreciation}
 \end{figure}
 
 
 
 Experimentalists further find evidence of behaviour not compatible with the exponential discounting model \cite{read98}. 
-When deciding between a snack of chocolate and fruit, varying the delay before consumption can change preferences;
-some study participants prefer a chocolate bar
-when they will consume immediately, but prefer fruit salad if they are to snack after a week. To switch from impulsiveness (chocolate) to patience
+The imposition of a common delay before the consumption of chocolate or fruit salad significantly impacts some individuals' preferences. 
+Some participants prefer chocolate if consumption is immediate and prefer fruit salad if consumption is after one week. 
+To switch between impulsiveness (chocolate) and patience
 (fruit) as
 both alternatives become further removed is called a preference reversal. A preference reversal of this nature is shown in Figure 
 \ref{fig:discountedValueHyperbolic}.
@@ -297,11 +300,11 @@ Notably, exponential discounting is the only model of time preferences which doe
 \end{figure}
 
 
-We propose to use techniques from evolutionary modeling to resolve the discrepency between the theory and the reality of time preferences.
+We propose to use techniques from evolutionary modeling to resolve the discrepency between the theory and the practice of time preferences.
 Of note, all discounting examples until present have involved humans; this need not be the case. Decisions involving patience are made by both
 human and non-human animals \cite{fawcett12}. While researchers, accountants, and financial engineers may quantify time preferences using
 discounting functions, most smaller/sooner or larger/later decisions are guided by intuition rather than mathematics. The intuition determining
-time preferences has been called the \textit{adaptive unconscious}, which is the collection of mental processes we use when making 
+time preferences is called the \textit{adaptive unconscious}, which is the collection of mental processes used when making 
 decisions without conscious and deliberate consideration \cite{wegner02}. The adaptive unconscious is adaptive in that it favours behaviour
 aiding survival and reproductive success. Those offspring born with better instincts are more likely to survive/reproduce, so that in the long
 run, those with adaptive instincts dominate. Our core assumption throughout this article is that time preferences are determined by the adaptive
@@ -322,7 +325,7 @@ A consistent approach to the application of evolutionary modeling to time prefer
 translate directly to fitness outcomes. In this article, we add an intermediate step, considering rewards in units of future offspring which we 
 subsequently convert to a fitness measurement. Consequently, the relative value of delayed rewards is not determined by subjective and debatable
 evaluations of risk or opportunity cost, but instead mechanistically determined by the choice of fitness measurement. 
-The demographic factors survival and ambient population growth determine risk and opportunity cost, respectively. 
+Our approach reveals that the demographic factors survival and ambient population growth determine risk and opportunity cost, respectively. 
 Our contribution is to put forward a model making less assumptions and which reinforces the core hypotheses in previous research. We apply
 our model to a highly general demographic setting in which we derive time preferences corresponding to any risk and reward profile. Finally,
 we apply our approach to better understand preference reversals and reconcile the theory and empirics of discounting. 
@@ -332,22 +335,20 @@ we apply our approach to better understand preference reversals and reconcile th
 
 \section{Life Histories and Reproductive Success}
 
-Consider a discrete time setup with a large population
-in which each agent's age is indexed by $a\in\left\{ 0, 1, \ldots, A \right\}$. That time is discrete is
-not a limiting assumption, since in practice we may take units of time small enough so as to be essentially continuous. Further, 
-the imposition of a maximal age class $A$ is reasonable since we may take $A$ large enough that death is guaranteed after
-age $A$. Suppose every individual in the population is subject to the same survival and fecundity
-schedules, $\vec{s} = (s_0, s_1, \ldots, s_{A-1}, s_A = 0)$, and $\vec{b} = (b_0, b_1, \ldots, b_A)$. Here, 
-$s_a$ is the probability of surviving from age $a$ to $a+1$, and $b_a$ is the expected
-number of offspring produced conditional on reaching age $a$. 
-The survival/reproduction pair of schedules $(\vec{s}, \vec{b})$
-is called the population's life history $\LH_0$. 
+To model the evolution of time preferences, consider a population with discrete age classes $a\in\left\{ 0, 1, \ldots, A \right\}$. 
+Assuming discrete age classes is not limiting since we may take units of time small enough so as to closely mirror continuous time. Further,
+the maximal age $A$ may be justified by choosing $A$ large enough so that the probability of surviving to to age $A$ is negligible. Survival
+and reproduction are uniform across the population: each individual produces on average $b_a$ offspring at age $a$, and survives from $a$
+to $a+1$ with with probability $s_a$. The survival and reproduction schedule $(\vec{s}, \vec{b}) = (s_0, s_1, \ldots, s_{A-1}, s_A = 0), (b_0, b_1, 
+\ldots, b_A)$ is called the baseline life history $\LH_0$. 
+
 
 We use this population to study the evolution of time preferences by providing agents with reproductive dilemmas: a choice
 between some offspring early in life and more offspring later. Agents' time preferences determine their reproductive schedule
 (in addition to baseline life history $\LH_0$). We assume 
-time preferences are subject to small mutations and study their evolutionary trajectory. Our analysis relies on 
-standard fitness measures from evolutionary ecology: lifetime progeny $R_0$ and monomorphic population growth rate $\lambda$ 
+time preferences are subject to small mutations and study their evolutionary trajectory. To compute the relative evolutionary benefit of
+additional offpsring at different ages, we introduce two 
+fitness measures from evolutionary ecology: lifetime progeny $R_0$ and monomorphic population growth rate $\lambda$ 
 \cite{stearns92}.
  
 
@@ -356,7 +357,8 @@ Lifetime reproductive output is computed as
     R_0 = \sum\limits_{a = 0}^A \prod\limits_{k = 0}^{a-1} s_k b_a.
     \label{eqn:output}
 \end{equation}
-This is the sum of the expected number of offspring produced at each age $a= 0, 1, \ldots, A$. 
+Equation \ref{eqn:output} is the sum of the expected number of offspring produced at each age $a= 0, 1, \ldots, A$; here,
+and throughout, the empty product evaluates to 1. 
 Population growth (also called the Lyapunov exponent) $\lambda$
 appears in the discrete-time Euler-Lotka equation,
 \begin{equation}
@@ -374,16 +376,19 @@ While it is not possible to compute analytically, the Lyapunov exponent is impli
     \lambda = \lambda(\LH_0) = \lambda(s_0, s_1, \ldots, s_{A-1}, b_0, b_1, \ldots, b_{A}).
     \label{eqn:lambda_function}
 \end{equation}
-In practice, the Lyapunov exponent is computed numerically, and in each expression, the empty product evaluates to $1$. 
+In practice, the Lyapunov exponent is computed numerically. 
 In the long run, a population with fixed life history will converge to a stable age distribution and
 thus grow (or decay) 
 exponentially at a constant rate $\lambda$ per unit time. If $\lambda = 1$, then the population remains at a fixed size indefinitely.
 
-We use population growth $\lambda$ as our measure of reproductive success. The assumption that populations grow exponentially is limiting: if
+The fitness measures $R_0$ and $\lambda$ evaluate the relative value of offspring differently. Specifically, lifetime reproductive 
+output $R_0$ does not account for compounding benefits from early reproduction. Absent risk, offspring at age $0$ contribute equally to
+$R_0$ as offspring at maximum age $A$. Monomorphic growth rate $\lambda$, then, accounts for opportunity cost which $R_0$ neglects. 
+We therefore favour population growth $\lambda$ as our measure of reproductive success. The assumption that populations grow exponentially is limiting: if
 ever $\lambda > 1$,  we implicitly assume that resources are in inexhaustible supply 
 and do not constrain growth. A sustainable population is one that is of constant size, which has
-$\lambda \approx 1$. The question is now: What selective pressures does $\lambda$ 
-exert over time preferences?
+$\lambda \approx 1$. If two phenotypes with different Lyapunov exponents compete, the one with the larger $\lambda$ value dominates.
+The question is now: If selective pressures form time preferences to maximize $\lambda$, what form does the resulting discounting function take?
 
 
 \section{Reproductive Dilemmas}
