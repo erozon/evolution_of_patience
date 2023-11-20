@@ -210,7 +210,7 @@ Environmental policy, for instance,
 dictates whether to reduce exploitation in the present to preserve resources for future use. 
 This article explores how individuals weigh immediacy and magnitude to determine the value of a delayed reward. 
 
-Time preferences describe how an agent's perceived value of a delayed reward changes as a function of the delay. 
+Time preferences describe how a decision maker's perceived value of a delayed reward changes as a function of the delay. 
 A discounting function $\Delta$ quantitatively encodes time preferences: a reward received at delay $t\ge0$ maintains a fraction
 $\Delta(t)$ of its value. Normally, $\Delta(0) = 1$ and $\Delta$ is decreasing in $t$. 
 Returning to the original example, 
@@ -228,7 +228,7 @@ Reconciling the theory and practice of time preferences is a central goal of thi
 
 If delayed rewards lose a constant fraction of their value for every unit-time delay, then discounting is exponential. 
 For example, if fruit salad's delayed benefit loses a fraction $r\in(0, 1)$ for each unit of time $t$, then
-the fruit salad discounted at a rate of 
+fruit salad is discounted at a rate of 
 \begin{align}
     \Delta_{\exp}(t) &= (1-r)^{t} \\
     &= e^{-\tilde r t} 
@@ -245,13 +245,10 @@ rate $r$ appreciates (after $t$ units of time) to
     \label{eqn:compound_interest}
 \end{equation}
 which grows (or appreciates) exponentially in time $t$. 
-Mathematically, appreciation is the reciprocal of discounting. Appreciation and discounting equivalently define time preferences: a reward $P$ loses 
-a fraction $\Delta(t)$ of its value after delay $t$ precisely when an individual is indifferent between $P$ immediately and the delayed alternative
-$P/\Delta(t)$.
 
 
 
-Some experimental results find that observed discounting behaviour is better explained
+Some experimental results find that observed time preferences are better explained
 by a hyperbolic, rather than exponential, discounting function \cite{maia09, green04, doyle12}. A hyperbolic discounting function takes
 the form
 \begin{equation}
@@ -266,23 +263,22 @@ of $P$ at simple interest rate $h$ appreciates after $t$ units of time to
     P + hP + hP + \cdots + hP = P(1 + ht)
     \label{eqn:simple_interest}
 \end{equation}
-which grows linearly in time $t$. Figure \ref{fig:discounting_appreciation} graphically depicts both the exponential and hyperbolic discounting
-and appreciation models. 
-
-\begin{figure}[H]
-    \centering
-    \includegraphics{discounting_appreciation.png}
-    \caption[Example discounting and corresponding appreciation schedules.]{Discounting versus appreciation in delayed rewards. 
-        (a): the discounted value of a reward of magnitude $1$ plotted as a function of delay $t$.  
-        (b): the same time preferences represented with appreciation, which is the reciprocal of discounting. An immediate reward of size $1$ is
-        of the same perceived value as a reward of size $1/\Delta(t)$ received after delay $t$. 
-        Hyperbolic and exponential time preferences are more easily distinguished by appreciation, rather than discounting, plots.
-        Exponential discounters exhibit exponential
-        growth in appreciation, whereas hyperbolic discounting is consistent with linear growth.}
-        \label{fig:discounting_appreciation}
-\end{figure}
+which appreciates linearly in time $t$. 
+Consider briefly a deposit of \$1 in a bank account. The hyperbolic banker will receive the same interest per unit time. 
+The exponential banker, on the other hand, receives ever increasing interest payments as compounding interest adds up. 
+The supposed irrationality of hyperbolic discounting is due to the observation that the hyperbolic banker could withdraw and immediately
+deposit their interest payments to earn additional interest. 
 
 
+Discounting and appreciation equivalently define time preferences. The present value of fruit salad is given in Equation \ref{eqn:choco_or_fruit}.
+The appreciated value of chocolate to time $t$ is 
+\begin{equation}
+    \frac{1}{\Delta(t)} \cdot \text{(Benefit of Chocolate)}. 
+    \label{eqn:appreciation}
+\end{equation}
+Mathematically, appreciation and discounting are reciprocal. Discounting transforms the delayed reward to be comparable to present, whereas
+appreciation transforms the immediate reward to be comparable to the future alternative. 
+We use discounting or appreciation interchangeably given their dual nature. 
 
 Experimentalists further find evidence of behaviour not compatible with the exponential discounting model \cite{read98}. 
 The imposition of a common delay before the consumption of chocolate or fruit salad can significantly impacts preferences. 
@@ -290,25 +286,22 @@ Some study participants prefer chocolate if consumption is immediate and prefer 
 To switch between impulsiveness (chocolate) and patience
 (fruit) as
 both alternatives become further removed is called a preference reversal. 
-%A preference reversal of this nature is shown in Figure \ref{fig:discountedValueHyperbolic}.
 Notably, exponential discounting is the only model of time preferences which does not predict preference reversals
 \cite{strotz55}. 
 
 
 
-%
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[scale = 0.7]{discountedValueHyperbolic.png}
-%    \caption[Graphical depiction of a preference reversal.]{Preference reversals are predicted by hyperbolic discounting. Suppose an individual
-%        chooses between a desert of either chocolate
-%        or fruit salad, to be consumed after some common delay $t$. As in the text,
-%        chocolate has a value of $1$ and fruit has a value of $1.5$ (received after an additional delay of one unit of time). 
-%        The figure shows the discounted value
-%        of each alternative by a hyperbolic discounter ($h = 1$): chocolate is preferred if and only if the common delay $t < 1$. }
-%    \label{fig:discountedValueHyperbolic}
-%\end{figure}
-%
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.4]{appreciated_and_discounted_fruit_and_chocolate.png}
+    \caption[Graphical depiction of a preference reversal.]{A common delay of $t$ is experienced before consumption of both chocolate
+    and fruit salad. Hyperbolic discounting results in a preference reversal: as the common delay increases past $t = 5$, the preferred
+choice shifts from chocolate to fruit salad. Hyperbolic discounting is characterised by quasi-linear appreciation plots. Values $r = 1/20$ and
+$h = 1/5$ used for demonstration purposes.} 
+    \label{fig:discountedValueHyperbolic}
+\end{figure}
+
 
 We use techniques from evolutionary modeling to resolve the discrepency between the theory and the practice of time preferences.
 While researchers, accountants, and financial engineers may quantify time preferences using
@@ -338,9 +331,16 @@ We derive an evolutionarily stable discounting function by applying adaptive dyn
 Our evolutionarily stable discounting function naturally decomposes into risk and opportunity cost, factors which
 must be assumed if discounting fitness gains directly. 
 
+Some highlights from this approach:
+\begin{itemize}
+    \item Exponential discounting might be rational.
+    \item Non-constant survival probability results in non-exponential time preferences. In particular, preference reversals
+        abound.
+    \item Time preferences determined by adaptive dynamics might result in upward sloping discounting functions. An offspring later in life could
+        be preferred to an offspring earlier, even in the absence of any parental care. 
+\end{itemize}
 
 
-\textit{Should I talk about what my model predicts in the introduction?}
 
 
 \section{Life Histories and Reproductive Success}
@@ -353,14 +353,18 @@ to $a+1$ with with probability $s_a$. The survival and reproduction schedule $(\
 \ldots, b_A)$ is called the baseline life history $\LH_0$. 
 
 
-We use this population to study the evolution of time preferences by providing agents with reproductive dilemmas: a choice
-between some offspring early in life and more offspring later. Agents' time preferences determine their reproductive schedule
-(in addition to baseline life history $\LH_0$). We assume 
-time preferences are subject to small mutations and study their evolutionary trajectory. To compute the relative evolutionary benefit of
+In our model, agents face reproductive dilemmas: 
+a choice between some offspring early in life and more offspring later. 
+While all individuals share the same baseline life history $\LH_0$, their time preferences may vary so that reproductive schedules differ
+slightly. Time preferences can mutate beteween generations, and therefore
+evolutionary dynamics determine time preferences. 
+Fitness is required to model the evolutionary dynamics of time preferences, so to 
+compute the relative fitness benefit of
 additional offpsring at different ages, we introduce two 
-fitness measures from evolutionary ecology: lifetime progeny $R_0$ and monomorphic population growth rate $\lambda$ 
+measures from evolutionary ecology: lifetime reproductive output $R_0$ and monomorphic population growth rate $\lambda$ 
 \cite{stearns92}.
- 
+
+
 
 Lifetime reproductive output is computed as
 \begin{equation}
@@ -402,24 +406,13 @@ The question is now: If selective pressures form time preferences to maximize $\
 
 
 \section{Reproductive Dilemmas}
-Recall that time preferences are defined to be an individual's decision facing any dilemma between a smaller/sooner reward
-and a larger/later alternative. By presenting agents with such dilemmas and allowing an evolutionary process to determine which
-time preferences are adopted and which go extinct, we may determine adaptive time preferences. 
+A variable environment presents individuals with fecundity dilemmas, meaning a decision must be made between some offspring
+immediately and more offspring later in life. More technically, let $\varepsilon > 0$ be small. A fecundity dilemmas is a choice
+between the smaller/sooner option of increasing $b_a$ to $b_a + \varepsilon$, and the larger/later option of increasing $b_{a+1}$ to
+$b_{a+1} + F\cdot \varepsilon$. That $\varepsilon$ is small encodes the assumption that environmental variability changes reproductive
+probabilities only slightly. 
 
-In our model, we present each agent with a stochastically determined
-smaller/sooner versus larger/later fecundity dilemma.  As motivation, consider
-a randomly varying environment in which resource fluctuations result in the option to
-increase reproduction at various points over the life history. Note that these fecundity increases are in addition to a baseline life history
-$\LH_0$ common to all agents.  
-Fix $\varepsilon > 0$ small.  
-Individuals decide between:
-\begin{enumerate}
-    \item $\smallersooner:$ increase fecundity at age $a$ to $b_a\uparrow b_{a} + \varepsilon$, and
-    \item $\largerlater:$ increase $b_{a+1}\uparrow b_{a+1} + F\cdot \varepsilon$.
-\end{enumerate}
 
-We use $\varepsilon > 0$ (small) as our unit of fecundity dilemma, assuming environmental stochasticity results in relatively minor changes to 
-fecundity. 
 Denote each dilemma by the pair $(a, F)$, where $a$ is the age at which the dilemma is faced,
 and $F$ is the ratio of $\largerlater$ to $\smallersooner$. 
 Remark that we assume dilemmas are between age $a$ and $a+1$ rather than an arbitrary delay $a+t$. This restriction simplifies our analysis
