@@ -198,42 +198,46 @@ converges. Our results imply that individual survival probability and ambient po
 \linenumbers
 \section{Introduction}
 
-Decisions often have delayed consequences. Consider a choice between chocolate and fruit salad.
-While chocolate offers immediate satisfaction, fruit salad provides health benefits enjoyed later in time. 
-More generally, diet, exercise, and the management of addictions all involve weighing the benefits of a small, immediate 
-reward as compared with a larger, more delayed alternative. 
-Intertemporal choices may impact more than one individual at a time. Environmental policy, for instance,
+Consider a choice between chocolate and fruit salad.
+Chocolate promises immediate satisfaction, whereas fruit salad offers health benefits to be enjoyed later in time. 
+When deciding between chocolate and fruit salad, an individual is weighing a small, immediate reward as compared with a larger,
+more delayed alternative. 
+For concreteness, suppose chocolate offers a reward of magnitude $1$ immediately, and fruit salad offers a benefit of $2$ after
+a delay of $10$ units of time. 
+Personal decisions involving delayed gratification include diet, exercise, and the management of addictions. 
+More globally, government policies determine society's consumption level over time. 
+Environmental policy, for instance,
 dictates whether to reduce exploitation in the present to preserve resources for future use. 
-This article is concerned with the decision making process behind intertemporal dilemmas. 
+This article explores how individuals weigh immediacy and magnitude to determine the value of a delayed reward. 
 
-
-
-
-Time preferences describe an agent's willingness to wait for a delayed reward in the presence of more immediate alternatives. 
+Time preferences describe how an agent's perceived value of a delayed reward changes as a function of the delay. 
 A discounting function $\Delta$ quantitatively encodes time preferences: a reward received at delay $t\ge0$ maintains a fraction
-$\Delta(t)$ of its value. Naturally, $\Delta(0) = 1$ and $\Delta$ is normally decreasing in $t$. 
-As a concrete example, suppose chocolate provides benefit of $1$ immediately, whereas fruit salad provides benefit $2$ after a delay of $10$ unites
-of time. 
-Mathematically, fruit salad is preferred if and only if
+$\Delta(t)$ of its value. Normally, $\Delta(0) = 1$ and $\Delta$ is decreasing in $t$. 
+Returning to the original example, 
+chocolate is preferred to fruit salad if and only if
 \begin{align}
-    \text{Benefit of Chocolate} &< (\text{Discount Factor}) \cdot (\text{Benefit of Fruit}) \\
-    \iff 1 &< \Delta(10) \cdot 2.
+    \text{Benefit of Chocolate} &> (\text{Discount Factor}) \cdot (\text{Benefit of Fruit}) \\
+    \iff 1 &> \Delta(10) \cdot 2.
     \label{eqn:choco_or_fruit}
 \end{align}
-The theoretical approach to time preferences axiomatises rational behaviour and mathematically derives corresponding discounting
-functions. Experimental studies, on the other hand, collect data and describe observed time preferences with approximately fitting discounting
-functions \cite{mazur85, ainslie75, green81, green04}. Reconciling the theory and practice of time preferences is a central goal of this paper. 
+Experimentalists and theorists take different approaches to derive discounting functions. Experimental studies collect data on
+observed preferences and infer a discounting function by fitting a curve through data points. Theorists, on the other hand, axiomatise
+rational behaviour and mathematically derive corresponding discounting functions \cite{mazur85, ainslie75, green81, green04}. 
+Reconciling the theory and practice of time preferences is a central goal of this paper. 
 
 
-If delayed rewards lose a constant fraction of their value for every unit-time delay, then discounting is exponential. The exponential
-discounting function is of the form
-\begin{equation}
-    \Delta_{\exp}(t) = e^{-r t}
-\end{equation}
-where $r>0$ is a parameter indicating how quickly a reward loses its value. 
+If delayed rewards lose a constant fraction of their value for every unit-time delay, then discounting is exponential. 
+For example, if fruit salad's delayed benefit loses a fraction $r\in(0, 1)$ for each unit of time $t$, then
+the fruit salad discounted at a rate of 
+\begin{align}
+    \Delta_{\exp}(t) &= (1-r)^{t} \\
+    &= e^{-\tilde r t} 
+    \label{eqn:exponential_discounting}
+\end{align}
+for appropriate choice of $\tilde r$. 
 The exponential discounting model is popular among economists in particular
 for its straightforward assumptions and ease of use \cite{sozou98}. 
-In particular, the model 
+The exponential discounting model 
 agrees with financial models in which loans accrue compound interest at a specified rate $r>0$. An initial loan of $P$ at compound interest
 rate $r$ appreciates (after $t$ units of time) to 
 \begin{equation}
@@ -328,9 +332,8 @@ from a probability distribution, non-exponential (and in particular, hyperbolic)
 If risk is constant, explicitly accounting for opportunity
 cost to delayed fitness gains produces various models predicting preference reversals \cite{fawcett12}. 
 
-Our approach differs from previous studies by proposing that  
-time preferences determine an agent's willingness to wait for delayed reproductive opportunities, rather than fitness gains. 
-The mechanism mapping reproductive opportunities to fitness therefore determines the relative value of rewards at different points in time. 
+Our approach differs from previous studies by considering dilemmas between delayed reproductive opportunities, rather than fitness gains. 
+The mechanism mapping reproductive success to fitness therefore determines the relative value of rewards at different points in time. 
 We derive an evolutionarily stable discounting function by applying adaptive dynamics to time preferences. 
 Our evolutionarily stable discounting function naturally decomposes into risk and opportunity cost, factors which
 must be assumed if discounting fitness gains directly. 
