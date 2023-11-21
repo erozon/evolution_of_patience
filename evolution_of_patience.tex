@@ -84,7 +84,7 @@
 \pagestyle{fancy}
 
 \fancyhead[L, C]{}
-\fancyhead[R]{\includegraphics[scale=.35]{sb_logo_black.png}}
+%\fancyhead[R]{\includegraphics[scale=.35]{sb_logo_black.png}}
 \fancyfoot[L]{}
 \fancyfoot[C]{\thepage}
 \fancyfoot[R]{}
@@ -149,9 +149,9 @@
       
             
        \vspace{4.1cm}
-       \includegraphics[scale = 1.4]{sb_logo_black.png} \\
+%       \includegraphics[scale = 1.4]{sb_logo_black.png} \\
        \vspace*{\fill}
-       \textbf{Eric, Christoph, and Jaye } 
+       \textbf{Eric Rozon and Christoph Hauert  } 
 
             
        Department of Mathematics\\
@@ -220,6 +220,17 @@ chocolate is preferred to fruit salad if and only if
     \iff 1 &> \Delta(10) \cdot 2.
     \label{eqn:choco_or_fruit}
 \end{align}
+Discounting and appreciation equivalently define time preferences. The present value of fruit salad is given in Equation \ref{eqn:choco_or_fruit}.
+The appreciated value of chocolate to time $t$ is 
+\begin{equation}
+    \frac{1}{\Delta(t)} \cdot \text{(Benefit of Chocolate)}. 
+    \label{eqn:appreciation}
+\end{equation}
+Mathematically, appreciation and discounting are reciprocal. Discounting transforms the delayed reward to be comparable to present, whereas
+appreciation transforms the immediate reward to be comparable to the future alternative. 
+We use discounting or appreciation interchangeably given their dual nature. 
+
+
 Experimentalists and theorists take different approaches to derive discounting functions. Experimental studies collect data on
 observed preferences and infer a discounting function by fitting a curve through data points. Theorists, on the other hand, axiomatise
 rational behaviour and mathematically derive corresponding discounting functions \cite{mazur85, ainslie75, green81, green04}. 
@@ -244,7 +255,7 @@ rate $r$ appreciates (after $t$ units of time) to
     P(1 + r)^{t} = Pe^{\log(1+r) t} = Pe^{\tilde{r}t},
     \label{eqn:compound_interest}
 \end{equation}
-which grows (or appreciates) exponentially in time $t$. 
+which appreciates exponentially in time $t$. 
 
 
 
@@ -270,16 +281,6 @@ The supposed irrationality of hyperbolic discounting is due to the observation t
 deposit their interest payments to earn additional interest. 
 
 
-Discounting and appreciation equivalently define time preferences. The present value of fruit salad is given in Equation \ref{eqn:choco_or_fruit}.
-The appreciated value of chocolate to time $t$ is 
-\begin{equation}
-    \frac{1}{\Delta(t)} \cdot \text{(Benefit of Chocolate)}. 
-    \label{eqn:appreciation}
-\end{equation}
-Mathematically, appreciation and discounting are reciprocal. Discounting transforms the delayed reward to be comparable to present, whereas
-appreciation transforms the immediate reward to be comparable to the future alternative. 
-We use discounting or appreciation interchangeably given their dual nature. 
-
 Experimentalists further find evidence of behaviour not compatible with the exponential discounting model \cite{read98}. 
 The imposition of a common delay before the consumption of chocolate or fruit salad can significantly impacts preferences. 
 Some study participants prefer chocolate if consumption is immediate and prefer fruit salad if consumption is after one week. 
@@ -287,7 +288,8 @@ To switch between impulsiveness (chocolate) and patience
 (fruit) as
 both alternatives become further removed is called a preference reversal. 
 Notably, exponential discounting is the only model of time preferences which does not predict preference reversals
-\cite{strotz55}. 
+\cite{strotz55}. Figure \ref{fig:discountedValueHyperbolic} shows both exponential and hyperbolic time preferences in discounting and appreciation
+plots, including a preference reversal. 
 
 
 
@@ -298,7 +300,7 @@ Notably, exponential discounting is the only model of time preferences which doe
     \caption[Graphical depiction of a preference reversal.]{A common delay of $t$ is experienced before consumption of both chocolate
     and fruit salad. Hyperbolic discounting results in a preference reversal: as the common delay increases past $t = 5$, the preferred
 choice shifts from chocolate to fruit salad. Hyperbolic discounting is characterised by quasi-linear appreciation plots. Values $r = 1/20$ and
-$h = 1/5$ used for demonstration purposes.} 
+$h = 1/5$ are used for demonstration purposes.} 
     \label{fig:discountedValueHyperbolic}
 \end{figure}
 
@@ -343,37 +345,66 @@ Some highlights from this approach:
 
 
 
-\section{Life Histories and Reproductive Success}
+\section{Life Histories, Reproductive Success, and Fitness}
 
-To model the evolution of time preferences, consider a population with discrete age classes $a\in\left\{ 0, 1, \ldots, A \right\}$. 
+Consider a population with discrete age classes $a\in\left\{ 0, 1, \ldots, A \right\}$. 
 Assuming discrete age classes is not limiting since we may take units of time small enough so as to approximate continuous time. Further,
 the maximal age $A$ may be justified by choosing $A$ large enough so that the probability of surviving to to age $A$ is negligible. Survival
 and reproduction are uniform across the population: each individual produces on average $b_a$ offspring at age $a$, and survives from $a$
 to $a+1$ with with probability $s_a$. The survival and reproduction schedule $(\vec{s}, \vec{b}) = (s_0, s_1, \ldots, s_{A-1}, s_A = 0), (b_0, b_1, 
 \ldots, b_A)$ is called the baseline life history $\LH_0$. 
 
+The baseline life history $\LH_0$ is the same for all individuals. A variable environment presents
+individuals with fecundity dilemmas,  
+a choice between a small increase to $b_a$ and a larger increase to $b_{a+1}$. 
+An individual's life history is the baseline $\LH_0$ in addition to either the smaller/sooner ($\smallersooner$)
+or larger/later ($\largerlater$) option in a fecundity dilemma: 
+\begin{equation}
+    \LH = \begin{cases}
+        \LH_0 + \smallersooner &  \\
+        & \text{as determined by time preferences.} \\
+        \LH_0 + \largerlater & 
+    \end{cases}
+    \label{eqn:life_history_equation}
+\end{equation}
+Compactly, a fecundity dilemma is a pair $(a, F)$, where $a$ is the
+age at which the dilemma is faced and $F > 0$ is the ratio of $\largerlater$ to $\smallersooner$. Discounting in a life history 
+context requires a slightly different approach to discounting in general. Rather than discounting delayed rewards
+to present value, additional fecundity at age $a$ is discounted to its value at age $0$. Notationally, $\Delta(a)$ is interpreted as
+the discount factor comparing fecundity at age $a$ to fecundity at age $0$. 
+Figure \ref{fig:evolutionary_dilemma}
+shows a fecundity dilemma in addition to a baseline life history. 
 
-In our model, agents face reproductive dilemmas: 
-a choice between some offspring early in life and more offspring later. 
-While all individuals share the same baseline life history $\LH_0$, their time preferences may vary so that reproductive schedules differ
-slightly. Time preferences can mutate beteween generations, and therefore
-evolutionary dynamics determine time preferences. 
-Fitness is required to model the evolutionary dynamics of time preferences, so to 
-compute the relative fitness benefit of
-additional offpsring at different ages, we introduce two 
-measures from evolutionary ecology: lifetime reproductive output $R_0$ and monomorphic population growth rate $\lambda$ 
-\cite{stearns92}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{evolutionary_dilemma.png}
+    \caption[Baseline life history and reproductive dilemma example.]{A baseline life history can be visualized as a bar plot (grey). 
+        The bar at $a$ is the expected number of offspring at age $a$. Reproductive dilemmas are additions to fecundity (green). 
+        Illustrated is the dilemma $(a = 2, F = 3)$, a decision between $\smallersooner$: an increase to $b_2$, and $\largerlater$: an increase
+        to $b_{2 + 1}$ which is $F = 3$ times as large.} 
+        \label{fig:evolutionary_dilemma}
+\end{figure}
 
 
 
-Lifetime reproductive output is computed as
+%
+%Fitness is required to model the evolutionary dynamics of time preferences, so to 
+%compute the relative fitness benefit of
+%additional offpsring at different ages, we introduce two 
+%measures from ecology: lifetime reproductive output $R_0$ and monomorphic population growth rate $\lambda$ 
+%\cite{stearns92}.
+%
+
+
+An individual's lifetime reproductive output is computed as
 \begin{equation}
     R_0 = \sum\limits_{a = 0}^A \prod\limits_{k = 0}^{a-1} s_k b_a.
     \label{eqn:output}
 \end{equation}
-Equation \ref{eqn:output} is the sum of the expected number of offspring produced at each age $a= 0, 1, \ldots, A$; here,
-and throughout, the empty product evaluates to 1. 
-Population growth (also called the Lyapunov exponent) $\lambda$
+Equation \ref{eqn:output} is the sum of the expected number of offspring produced at each age $a= 0, 1, \ldots, A$. 
+Throughout, the empty product evaluates to 1. 
+A population's unit-time growth rate, or Lyapunov exponent, denoted $\lambda$
 appears in the discrete-time Euler-Lotka equation,
 \begin{equation}
     \lambda^{A+1} - \sum\limits_{a = 0}^A \lambda^{A-a} \prod\limits_{k = 0}^{a-1}s_k b_k= 0.
@@ -385,217 +416,59 @@ Whereas the expression for $R_0$ is easily computed, the Euler-Lotka equation
 is a polynomial in $\lambda$ of degree $A+1$, and so has up to $A+1$ distinct solutions. The largest of these solutions is the growth
 rate of a monomorphic population, the Lyapunov exponent.
 The Euler-Lotka equation is derived from the Leslie matrix describing population dynamics with life history $\LH_0$ \cite{stearns92}.
-While it is not possible to compute analytically, the Lyapunov exponent is implicitly a function of life history data:
+The Lyapunov exponent is implicitly a function of life history data: 
 \begin{equation}
     \lambda = \lambda(\LH_0) = \lambda(s_0, s_1, \ldots, s_{A-1}, b_0, b_1, \ldots, b_{A}).
     \label{eqn:lambda_function}
 \end{equation}
-In practice, the Lyapunov exponent is computed numerically. 
+In general, while it is not possible to compute $\lambda$ analytically, the Lyapunov exponent is computed numerically. 
 In the long run, a population with fixed life history will converge to a stable age distribution and
 thus grow (or decay) 
-exponentially at a constant rate $\lambda$ per unit time. If $\lambda = 1$, then the population remains at a fixed size indefinitely.
-
-The fitness measures $R_0$ and $\lambda$ evaluate the relative value of offspring differently. Specifically, lifetime reproductive 
-output $R_0$ does not account for compounding benefits from early reproduction. Absent risk, offspring at age $0$ contribute equally to
-$R_0$ as offspring at maximum age $A$. Monomorphic growth rate $\lambda$, then, accounts for opportunity cost which $R_0$ neglects. 
-We therefore favour population growth $\lambda$ as our measure of reproductive success. The assumption that populations grow exponentially is limiting: if
-ever $\lambda > 1$,  the implicit assumption is that resources are in inexhaustible supply 
-and do not constrain growth. A sustainable population is one that is of constant size, which has
-$\lambda \approx 1$. If two phenotypes with different Lyapunov exponents compete, the one with the larger $\lambda$ value dominates.
-The question is now: If selective pressures form time preferences to maximize $\lambda$, what form does the resulting discounting function take?
+exponentially at a constant rate $\lambda$ per unit time. If $\lambda = 1$, then the population remains at a fixed size indefinitely \cite{stearns92}.
 
 
-\section{Reproductive Dilemmas}
-A variable environment presents individuals with fecundity dilemmas, meaning a decision must be made between some offspring
-immediately and more offspring later in life. More technically, let $\varepsilon > 0$ be small. A fecundity dilemmas is a choice
-between the smaller/sooner option of increasing $b_a$ to $b_a + \varepsilon$, and the larger/later option of increasing $b_{a+1}$ to
-$b_{a+1} + F\cdot \varepsilon$. That $\varepsilon$ is small encodes the assumption that environmental variability changes reproductive
-probabilities only slightly. 
+Lifetime reproductive output and unit-time growth rate are measurements translating life history data to a numerical measure of reproductive success. 
+To model the evolutionary dynamics of time preferences, we compare the fitness of resident populations with the fitness of rare mutants. 
+Let $\Phi$ be a function mapping life history data to fitness. In our results section, we consider the implications of both $\Phi = R_0$ and
+$\Phi = \lambda$. 
 
+%
+%The fitness measures $R_0$ and $\lambda$ evaluate the relative value of offspring differently. Specifically, lifetime reproductive 
+%output $R_0$ does not account for compounding benefits from early reproduction. Absent risk, offspring at age $0$ contribute equally to
+%$R_0$ as offspring at maximum age $A$. Monomorphic growth rate $\lambda$, then, accounts for opportunity cost which $R_0$ neglects. 
+%We therefore favour population growth $\lambda$ as our measure of reproductive success. The assumption that populations grow exponentially is limiting: if
+%ever $\lambda > 1$,  the implicit assumption is that resources are in inexhaustible supply 
+%and do not constrain growth. A sustainable population is one that is of constant size, which has
+%$\lambda \approx 1$. If two phenotypes with different Lyapunov exponents compete, the one with the larger $\lambda$ value dominates.
+%The question is now: If selective pressures form time preferences to maximize $\lambda$, what form does the resulting discounting function take?
+%
 
-Denote each dilemma by the pair $(a, F)$, where $a$ is the age at which the dilemma is faced,
-and $F$ is the ratio of $\largerlater$ to $\smallersooner$. 
-Remark that we assume dilemmas are between age $a$ and $a+1$ rather than an arbitrary delay $a+t$. This restriction simplifies our analysis
-while still allowing for a full understanding of evolved time preferences, since knowing preferences between $a$ and $a+1$ as well as between
-$a+1$ and $a+2$, we infer preferences between $a$ and $a+2$. 
-
-\begin{figure}[H]
-    \centering
-    \includegraphics{evolutionary_dilemma.png}
-    \caption[Baseline life history and reproductive dilemma example.]{A baseline life history $\vec{s}, \vec{b}$ can be visualized as a bar plot. The bar at $a$ is the expected number of offspring at
-        age $a$, given by
-    $\prod_{k = 0}^{a-1} s_k b_a$. Reproductive dilemmas are additions to fecundity. Illustrated is the dilemma $(2, 3)$, with
-$\varepsilon = 0.01$. That is, an agent faces a choice between an additional $0.01$ offspring at age $2$ and an additional $0.03$ offspring
-at age $3$.} 
-\end{figure}
-
-Individuals in our model have time preferences which indicate their preferred choice between $\smallersooner$ and $\largerlater$ facing any
-dilemma. 
-Consider a dilemma $(a, F)$. The switching point $x_a$ is the unique value satisfying that $\smallersooner$ is preferred
-if and only if $F < x_a$. 
-A patience threshold is a collection of switching points $(x_0, \ldots, x_{A-1})$.
-Since a patience threshold indicates preferences facing any dilemma $(a, F)$, time preferences may be uniquely 
-specified by either a patience threshold or a discounting function. 
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[scale = 0.8]{switching_point_pref_rev.png}
-    \caption[Patience threshold and alternative perspective on preference reversals.]{Patience thresholds are mathematically convenient and provide a straightforward visual representation of time preferences. 
-        Every point in $(a, F)$ space
-    represents a dilemma at age $a$ with reward ratio $\largerlater : \smallersooner = F$. 
-    Those points above the patience threshold correspond to dilemmas at which the $\largerlater$ alternative
-is preferred. Those points below the threshold are when $\smallersooner$ is preferred. The patience threshold also allows
-illustrates preference reversals. Consider the family of dilemmas $(a, 1.5)$, with age at dilemma $a$ variable (dotted black line). If the dilemma comes 
-before age $a = 1$, the agent 
-prefers $\smallersooner$. However, if the dilemma comes later in life, then $\largerlater$ is preferred. More generally, a
-downward sloping patience threshold indicates preference reversals from $\smallersooner\to\largerlater$, and an upward sloping threshold
-indicates the reverse. A horizontal patience threshold is consistent with exponential discounting, and indicates no preference reversals.
-}
-\end{figure}
-
-By way of summary, our model includes a large (or infinite) population sharing the same baseline life history $\LH_0 = (\vec{s}, \vec{b}).$ 
-Each agent faces a stochastically determined dilemma, denoted $(a, F)$, between a smaller/sooner and a larger/later fecundity reward. 
-Time preferences are given by a patience threshold $(x_0, x_1, \ldots, x_{A-1})$. 
-An individual's time preferences determine their reproductive success; by using the Lyapunov exponent $\lambda$ to measure reproductive 
-success, we are using the difference in population growth rate between residents and mutants to compute the evolutionary dynamics of time
-preferences and patience. 
-
-
-\section{Adaptive Dynamics of Patience}
-Adaptive dynamics is a framework for mathematically describing the trajectory of a continuosly varying trait when subject to evolutionary pressures. 
-Adaptive dynamics makes two key assumptions. We assume that mutations (i) are small, and (ii) occur infrequently.
-Under these assumptions, a mutant either goes extinct or replaces the resident population before any more mutations occur \cite{doebeli05}.
-A value to which a trait converges is called convergent stable. A value to which a trait remains if already there is called evolutionarily stable.
-Neither form of stability implies the other. For instance, a trait value which is convergent stable and not evolutionarily stable is called an
-evolutionary branching point. A major contribution of adaptive dynamics is the explanation of sympatric speciation, the 
-evolution of two different species in the same environment \cite{doebeli11}. 
-
-More technincally, suppose a continuously varying trait is subject to evolutionary pressures. \textit{Invasion fitness} is the relative
-success of a rare mutant with trait value $y$ invading into a monomorphic population with trait value $x$, $\varphi(y, x)$. If invasion
-fitness is positive, $\varphi(y, x) > 0$, then a rare mutant fixates. Our framework lends itself well to analysis by differentiation. 
-Increasing the trait value slightly is either beneficial, in which case the mutation fixates, or it is not beneficial, in which
-case the mutation vanishes. Adaptive dynamics describes the trajectory of the trait value $x$. 
-The \textit{selection gradient} is the function 
+\section{Results, Interpretation, and Discussion}
+Given a fitness measure $\Phi$,
+an adaptive dynamics analysis in Appendix \ref{sec:adaptive_dynamics} shows that time preferences converge to and
+remain at the discounting function $\Delta_\Phi$, where\footnote{The ratio in Equation \ref{eqn:ess_time_preferences} is 
+    called the Marginal Rate of Substitution in economic contexts where fitness $\Phi$ is replaced
+by utility, and describes the ratio at which an agent is willing to trade off between the goods $b_a$ and $b_0$.}
 \begin{equation}
-    D(x) = \left.\frac{\partial }{\partial y} \right\vert_{y = x}\varphi(y, x).
-    \label{eqn:selection_gradient}
+    \Delta_\Phi(a) = \frac{\partial \Phi}{\partial b_a} \bigg/ \frac{\partial \Phi}{ \partial b_0}.
+    \label{eqn:ess_time_preferences}
 \end{equation}
-If trait value $x$ is such that $D(x) > 0$, increasing the trait value is adaptive. If $x^*$ is such that $D(x^*) = 0$, then $x^*$ is a
-singular value. If $D(x^*) = 0$ and $D'(x^*) < 0$, 
-then $x^*$ is convergent stable: the trait value will converge to $x^*$. To determine if the trait value will remain at $x^*$, compute
-\begin{equation}
-    \ES(x) = \left.\frac{\partial^2 }{\partial y^2} \right\vert_{y = x}\varphi(y, x).
-    \label{eqn:evolutionary_stability}
-\end{equation}
-If $\ES(x^*) < 0$, then trait value $x^*$ is evolutionarily stable. The trait converges to and remains at $x^*$. On the other hand, if
-$\ES(x^*) > 0$, then $x^*$ is an evolutionary branching point: after converging to $x^*$, two distinct populations diverge from value $x^*$, one
-with trait values above and the other below $x^*$.  We here apply adaptive dynamics to the evolution of time preferences. 
-
-Suppose a population has baseline life history $\LH_0$ and begins with all individuals having the same time preferences,
-encoded as a patience threshold $(x_0, x_1, \ldots, x_{A-1})$. We compute the adaptive dynamics of each switching point
-$x_a$ independently. We first consider a mutant with switching point $y_a > x_a$ for age at dilemma $a$ fixed. 
-The mutant under consideration is slightly less patient than the resident population. Residents and mutants obtain identical outcomes except for dilemmas
-at age $a$ with ratio $F$ such that $x_a < F < y_a$, meaning residents choose $\largerlater$ and mutants choose $\smallersooner$. 
-To determine if the mutant with trait value $y_a$ is benefited, we analytically compute reproductive success via a first order Taylor approximation:
+If $\Phi = R_0$ or $\Phi = \lambda$, convergent and evolutionarily stable time preferences are given by
 \begin{align}
-    \lambda(\LH_0 + \smallersooner) &\approx \lambda(\LH_0) + \varepsilon \cdot \varSS \\
-    \lambda(\LH_0 + \largerlater) &\approx \lambda(\LH_0) + F\varepsilon \cdot \varLL.
+    \Delta_{R_0}(a) &= \prod_{k = 0}^{a-1} s_k \\ 
+    \Delta_{\lambda}(a) &= \lambda^{-a}\prod_{k = 0}^{a-1} s_k
 \end{align}
-Recall from equation (\ref{eqn:lambda_function}) that the Lyapunov exponent is implicitly a function of the fecundity terms $b_a$. 
-From the Taylor approximation we identify the payoff from choosing each alternative, 
-$\pi_{\smallersooner}$ and $\pi_{\largerlater}(F)$. Remark that the larger/later payout
-varies as a function of $F$, whereas the smaller/sooner payout is constant. We have: 
-\begin{align}
-    \pi_{\smallersooner} &= \varepsilon\cdot \varSS \label{eqn:varss} \\ 
-    \pi_{\largerlater}(F) &= F\varepsilon\cdot \varLL. \label{eqn:varll}
-\end{align}
+\textit{Points of interpretation and discussion\dots}
+\begin{itemize}
+    \item $\Delta_{R_0}$ and $\Delta_\lambda$ are almost identical.
+    \item The result is consistent with exponential discounting
+    \item If survival probability is non-constant, discounting is non-exponential.
+    \item In particular, preference reversals are predicted. 
+    \item While $\Delta(a) = 1$, we uniquely find that $\Delta$ need not be decreasing. In a shrinking population $\lambda < 1$, 
+        preferring less later is predicted by our approach. 
+\end{itemize}
 
-Invasion fitness describes the relative success of a rare mutant, and is the difference in reproductive success between
-a mutant and residents.  We assume dilemmas
-vary stochastically, so invasion fitness is the \textit{average} difference in success. Suppose the larger/later value $F$ is distributed with probability
-density function $g(F)$. 
-Denote by $\varphi_a(y_a, x_a)$ the invasion fitness of a mutant with switching point
-$y_a$ into a resident population with switching point $x_a$.  
-Recall that when $x_a < F < y_a$, residents choose the larger/later option and mutants prefer the smaller/sooner alternative, whereas
-outside of this interval outcomes are identical. Invasion fitness is then the average difference $\pi_{\smallersooner} - \pi_{\largerlater}(F)$
-over all dilemmas $(a, F)$, for $a$ fixed. 
-Mathematically, therefore, invasion fitness is given by 
-\begin{align}
-    \varphi_a(y_a, x_a) &= \mathbb{E}\left[ \pi_{\smallersooner} - \pi_{\largerlater}(F) \ | \ x_a < F < y_a\right] \\
-    &= \int_{x_a}^{y_a} \left[ \pi_{\smallersooner} - \pi_{\largerlater}(F) \right]g(F) \d F. 
-\end{align}
-Remark that the expression for invasion fitness
-$\varphi_a$ is the same whether $x_a < y_a$ or $y_a < x_a$, and is $0$ when $x_a = y_a$. 
-Since we assume dilemmas are distributed randomly, we compute the expected value as a weighted integral according to the distribution of $F$ over
-the interval on which the payouts differ. 
 
-From invasion fitness $\varphi_a(y_a, x_a)$, we compute the selection gradient $D(x_a)$ to determine which switching points
-are singular strategies.  
-Recall that increasing the switching point $x_a$ is adaptive if and only if $D(x_a) > 0$. We compute: 
-\begin{align}
-    D(x_a) &= \left.\frac{\partial }{\partial y_a} \right\vert_{y_a = x_a}\varphi_a(y_a, x_a)  \\
-    &=\left.\frac{\partial }{\partial y_a} \right\vert_{y_a = x_a}  \int_{x_a}^{y_a} \left[ \pi_{\smallersooner} - \pi_{\largerlater}(F) \right]g(F) \d F\\
-        &=\left[ \pi_{\smallersooner} - \pi_{\largerlater}(x_a)   \right]g(x_a) 
-\end{align}
-We verify that $D(x_a^*) = 0$ is solved whenever the payout from choosing smaller/sooner equals that from choosing larger/later,
-$\pi_{\smallersooner} = \pi_{\largerlater}(x_a^*)$. Intuitively, this result is reasonable: the singular switching point 
-is the one at which the payout from smaller/sooner is the same as that from larger/later. 
-We compute from equations (\ref{eqn:varss}) and (\ref{eqn:varll}) that
-$x_a^* =  \varSS/\varLL$. 
-
-We can further show that $x_a^*$ 
-is both convergent stable and evolutionarily stable. Convergent stability follows from showing that $D'(x_a^*) < 0$, whereas evolutionary
-stability follows from showing that $\frac{\partial^2 \varphi_a}{\partial y_a^2}(x_a^*, x_a^*)< 0$. In our case, the conditions are equivalent,
-so we compute:
-\begin{align}
-    \frac{\partial^2 \varphi_a}{\partial y_a^2}(y_a, x_a) &=\frac{\partial}{\partial y_a}\left[\varSS \cdot \varepsilon  - \varLL \cdot y_a\varepsilon \right] g(y_a)\\
-    &= \left[ -\varepsilon \varLL \right]\cdot g(y_a) + \left[ \varepsilon \varSS - y_a \right]
-\end{align}
-By evaluating at $(y_a, x_a) = (x_a^*, x_a^*)$, we determine the convergent and evolutionary stability of $x_a^*$. 
-\begin{align}
-    \frac{\partial^2 \varphi_a}{\partial y^2}(x_a^*, x_a^*) &= -\varepsilon \varLL g(x_a^*) + \left[ \varepsilon \varSS - \varepsilon \frac{\varSS}{\varLL}
-    \varLL\right]g'(x_a^*) \\
-    &= -\varepsilon \varLL g(x_a^*) + \left[0  \right]\cdot g'(x_a^*)\\
-    &= -\varepsilon\varLL g(x_a^*) < 0 \label{eqn:negative}
-\end{align}
-The quantity in line (\ref{eqn:negative}) is negative. By assumption, $\varepsilon > 0$. Since $g$ is a probability density function, it is also
-positive. Finally, since reproductive success $\lambda$ increases with fecundity, the derivative is also positive, and so the expression is
-negative. 
-We conclude that the switching point will converge to $x_a^*$, and once there, it will not deviate: the switching point $x_a^*$ is both
-convergent and evolutionarily stable. 
-
-Remark that the switching point $x_a^* =  \varSS/\varLL$ has been computed specifically for dilemmas at age $a$. We therefore now extend to
-the evolutionarily stable patience threshold $(x_0^*, x_1^*, \ldots, x_{A-1}^*)$. 
-We may translate with ease between discounting functions and patience thresholds. Given any patience threshold $(x_0, x_1, \ldots)$, the corresponding
-discounting schedule is given by 
-\begin{equation}
-    \Delta(t) = \left( \prod\limits_{k = 0}^{t - 1} x_k \right)^{-1}. \label{eqn:disc_from_thresh}
-\end{equation}
-Consequently, the evolutionarily stable discounting function (corresponding to our derived patience threshold) is
-\begin{equation}
-    \Delta^*(a) = \varSS/\frac{\partial \lambda}{\partial b_0}. 
-    \label{eqn:stable_discounting}
-\end{equation}
-Between equations (\ref{eqn:disc_from_thresh}) and (\ref{eqn:stable_discounting}), the delay variable changes from $t$ to $a$. 
-We do so to highlight an important difference between the classical theory of time preferences and our approach. 
-Classical discounting functions are age agnostic: delayed rewards are discounted to present value. In our evolutionarily stable discounting
-function $\Delta^*(a)$, however, age matters. Rather than offering a reward today or more tomorrow, we offer a reward at age $a$ or a larger
-reward at age $a+1$. To compare delayed rewards against a common benchmark, delayed rewards are translated to discounted value at
-age $0$, the initial age class. 
-
-The Euler-Lotka equation can be leveraged to compute an expression for the evolutionarily stable switching points. By using
-implicit differentiation, we compute
-\begin{equation}
-    \frac{\partial \lambda}{\partial b_a} = K\cdot \lambda^{-a} \prod\limits_{k = 0}^{a-1}s_k,
-\end{equation}
-where $K>0$ is an expression independent of $a$. We can now compute the evolutionarily stable switching point 
-\begin{equation}
-    x_a^* = \frac{\varSS}{\varLL} = \frac{K\cdot \lambda^{-a} \prod\limits_{k = 0}^{a-1}s_k}{K\cdot \lambda^{-a-1} \prod\limits_{k = 0}^{a}s_k} = \frac{\lambda}{s_a}.
-\end{equation}
-We further compute the adaptive discounting function
-\begin{equation}
-    \Delta^*(a) = \lambda^{-a}\prod\limits_{k = 0}^{a-1} s_k.
-\end{equation}
 
 
 
@@ -798,11 +671,183 @@ by empirical literature. We bridge the gap between the two perspectives by provi
 
 
 
-
-
 \newpage
 \bibliographystyle{alpha}
 \bibliography{research}{}
+
+
+
+
+
+\appendix
+
+\section{Patience Thresholds}
+For any dilemma $(a,F)$, an individual's time preferences determine their choice $\smallersooner$ or $\largerlater$. 
+Define the switching point $x_a$ to be the unique value satisfying that $\smallersooner$ is preferred
+if and only if $F < x_a$. 
+A patience threshold is a collection of switching points $(x_0, \ldots, x_{A-1})$ and fully specifies time preferences. 
+
+%
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[scale = 0.8]{switching_point_pref_rev.png}
+%    \caption[Patience threshold and alternative perspective on preference reversals.]{Patience thresholds are mathematically convenient and provide a straightforward visual representation of time preferences. 
+%        Every point in $(a, F)$ space
+%    represents a dilemma at age $a$ with reward ratio $\largerlater : \smallersooner = F$. 
+%    Those points above the patience threshold correspond to dilemmas at which the $\largerlater$ alternative
+%is preferred. Those points below the threshold are when $\smallersooner$ is preferred. The patience threshold also allows
+%illustrates preference reversals. Consider the family of dilemmas $(a, 1.5)$, with age at dilemma $a$ variable (dotted black line). If the dilemma comes 
+%before age $a = 1$, the agent 
+%prefers $\smallersooner$. However, if the dilemma comes later in life, then $\largerlater$ is preferred. More generally, a
+%downward sloping patience threshold indicates preference reversals from $\smallersooner\to\largerlater$, and an upward sloping threshold
+%indicates the reverse. A horizontal patience threshold is consistent with exponential discounting, and indicates no preference reversals.
+%}
+%\end{figure}
+%
+
+By way of summary, our model includes a large (or infinite) population sharing the same baseline life history $\LH_0 = (\vec{s}, \vec{b}).$ 
+Each agent faces a stochastically determined dilemma, denoted $(a, F)$, between a smaller/sooner and a larger/later fecundity reward. 
+Time preferences are given by a patience threshold $(x_0, x_1, \ldots, x_{A-1})$. 
+An individual's time preferences determine their reproductive success; by using the Lyapunov exponent $\lambda$ to measure reproductive 
+success, we are using the difference in population growth rate between residents and mutants to compute the evolutionary dynamics of time
+preferences and patience. 
+
+
+\section{Adaptive Dynamics of Patience} \label{sec:adaptive_dynamics}
+Adaptive dynamics is a framework for mathematically describing the trajectory of a continuosly varying trait when subject to evolutionary pressures. 
+Adaptive dynamics makes two key assumptions. We assume that mutations (i) are small, and (ii) occur infrequently.
+Under these assumptions, a mutant either goes extinct or replaces the resident population before any more mutations occur \cite{doebeli05}.
+A value to which a trait converges is called convergent stable. A value to which a trait remains if already there is called evolutionarily stable.
+Neither form of stability implies the other. For instance, a trait value which is convergent stable and not evolutionarily stable is called an
+evolutionary branching point. A major contribution of adaptive dynamics is the explanation of sympatric speciation, the 
+evolution of two different species in the same environment \cite{doebeli11}. 
+
+More technincally, suppose a continuously varying trait is subject to evolutionary pressures. \textit{Invasion fitness} is the relative
+success of a rare mutant with trait value $y$ invading into a monomorphic population with trait value $x$, $\varphi(y, x)$. If invasion
+fitness is positive, $\varphi(y, x) > 0$, then a rare mutant fixates. Our framework lends itself well to analysis by differentiation. 
+Increasing the trait value slightly is either beneficial, in which case the mutation fixates, or it is not beneficial, in which
+case the mutation vanishes. Adaptive dynamics describes the trajectory of the trait value $x$. 
+The \textit{selection gradient} is the function 
+\begin{equation}
+    D(x) = \left.\frac{\partial }{\partial y} \right\vert_{y = x}\varphi(y, x).
+    \label{eqn:selection_gradient}
+\end{equation}
+If trait value $x$ is such that $D(x) > 0$, increasing the trait value is adaptive. If $x^*$ is such that $D(x^*) = 0$, then $x^*$ is a
+singular value. If $D(x^*) = 0$ and $D'(x^*) < 0$, 
+then $x^*$ is convergent stable: the trait value will converge to $x^*$. To determine if the trait value will remain at $x^*$, compute
+\begin{equation}
+    \ES(x) = \left.\frac{\partial^2 }{\partial y^2} \right\vert_{y = x}\varphi(y, x).
+    \label{eqn:evolutionary_stability}
+\end{equation}
+If $\ES(x^*) < 0$, then trait value $x^*$ is evolutionarily stable. The trait converges to and remains at $x^*$. On the other hand, if
+$\ES(x^*) > 0$, then $x^*$ is an evolutionary branching point: after converging to $x^*$, two distinct populations diverge from value $x^*$, one
+with trait values above and the other below $x^*$.  We here apply adaptive dynamics to the evolution of time preferences. 
+
+Suppose a population has baseline life history $\LH_0$ and begins with all individuals having the same time preferences,
+encoded as a patience threshold $(x_0, x_1, \ldots, x_{A-1})$. We compute the adaptive dynamics of each switching point
+$x_a$ independently. We first consider a mutant with switching point $y_a > x_a$ for age at dilemma $a$ fixed. 
+The mutant under consideration is slightly less patient than the resident population. Residents and mutants obtain identical outcomes except for dilemmas
+at age $a$ with ratio $F$ such that $x_a < F < y_a$, meaning residents choose $\largerlater$ and mutants choose $\smallersooner$. 
+To determine if the mutant with trait value $y_a$ is benefited, we analytically compute reproductive success via a first order Taylor approximation:
+\begin{align}
+    \lambda(\LH_0 + \smallersooner) &\approx \lambda(\LH_0) + \varepsilon \cdot \varSS \\
+    \lambda(\LH_0 + \largerlater) &\approx \lambda(\LH_0) + F\varepsilon \cdot \varLL.
+\end{align}
+Recall from equation (\ref{eqn:lambda_function}) that the Lyapunov exponent is implicitly a function of the fecundity terms $b_a$. 
+From the Taylor approximation we identify the payoff from choosing each alternative, 
+$\pi_{\smallersooner}$ and $\pi_{\largerlater}(F)$. Remark that the larger/later payout
+varies as a function of $F$, whereas the smaller/sooner payout is constant. We have: 
+\begin{align}
+    \pi_{\smallersooner} &= \varepsilon\cdot \varSS \label{eqn:varss} \\ 
+    \pi_{\largerlater}(F) &= F\varepsilon\cdot \varLL. \label{eqn:varll}
+\end{align}
+
+Invasion fitness describes the relative success of a rare mutant, and is the difference in reproductive success between
+a mutant and residents.  We assume dilemmas
+vary stochastically, so invasion fitness is the \textit{average} difference in success. Suppose the larger/later value $F$ is distributed with probability
+density function $g(F)$. 
+Denote by $\varphi_a(y_a, x_a)$ the invasion fitness of a mutant with switching point
+$y_a$ into a resident population with switching point $x_a$.  
+Recall that when $x_a < F < y_a$, residents choose the larger/later option and mutants prefer the smaller/sooner alternative, whereas
+outside of this interval outcomes are identical. Invasion fitness is then the average difference $\pi_{\smallersooner} - \pi_{\largerlater}(F)$
+over all dilemmas $(a, F)$, for $a$ fixed. 
+Mathematically, therefore, invasion fitness is given by 
+\begin{align}
+    \varphi_a(y_a, x_a) &= \mathbb{E}\left[ \pi_{\smallersooner} - \pi_{\largerlater}(F) \ | \ x_a < F < y_a\right] \\
+    &= \int_{x_a}^{y_a} \left[ \pi_{\smallersooner} - \pi_{\largerlater}(F) \right]g(F) \d F. 
+\end{align}
+Remark that the expression for invasion fitness
+$\varphi_a$ is the same whether $x_a < y_a$ or $y_a < x_a$, and is $0$ when $x_a = y_a$. 
+Since we assume dilemmas are distributed randomly, we compute the expected value as a weighted integral according to the distribution of $F$ over
+the interval on which the payouts differ. 
+
+From invasion fitness $\varphi_a(y_a, x_a)$, we compute the selection gradient $D(x_a)$ to determine which switching points
+are singular strategies.  
+Recall that increasing the switching point $x_a$ is adaptive if and only if $D(x_a) > 0$. We compute: 
+\begin{align}
+    D(x_a) &= \left.\frac{\partial }{\partial y_a} \right\vert_{y_a = x_a}\varphi_a(y_a, x_a)  \\
+    &=\left.\frac{\partial }{\partial y_a} \right\vert_{y_a = x_a}  \int_{x_a}^{y_a} \left[ \pi_{\smallersooner} - \pi_{\largerlater}(F) \right]g(F) \d F\\
+        &=\left[ \pi_{\smallersooner} - \pi_{\largerlater}(x_a)   \right]g(x_a) 
+\end{align}
+We verify that $D(x_a^*) = 0$ is solved whenever the payout from choosing smaller/sooner equals that from choosing larger/later,
+$\pi_{\smallersooner} = \pi_{\largerlater}(x_a^*)$. Intuitively, this result is reasonable: the singular switching point 
+is the one at which the payout from smaller/sooner is the same as that from larger/later. 
+We compute from equations (\ref{eqn:varss}) and (\ref{eqn:varll}) that
+$x_a^* =  \varSS/\varLL$. 
+
+We can further show that $x_a^*$ 
+is both convergent stable and evolutionarily stable. Convergent stability follows from showing that $D'(x_a^*) < 0$, whereas evolutionary
+stability follows from showing that $\frac{\partial^2 \varphi_a}{\partial y_a^2}(x_a^*, x_a^*)< 0$. In our case, the conditions are equivalent,
+so we compute:
+\begin{align}
+    \frac{\partial^2 \varphi_a}{\partial y_a^2}(y_a, x_a) &=\frac{\partial}{\partial y_a}\left[\varSS \cdot \varepsilon  - \varLL \cdot y_a\varepsilon \right] g(y_a)\\
+    &= \left[ -\varepsilon \varLL \right]\cdot g(y_a) + \left[ \varepsilon \varSS - y_a \right]
+\end{align}
+By evaluating at $(y_a, x_a) = (x_a^*, x_a^*)$, we determine the convergent and evolutionary stability of $x_a^*$. 
+\begin{align}
+    \frac{\partial^2 \varphi_a}{\partial y^2}(x_a^*, x_a^*) &= -\varepsilon \varLL g(x_a^*) + \left[ \varepsilon \varSS - \varepsilon \frac{\varSS}{\varLL}
+    \varLL\right]g'(x_a^*) \\
+    &= -\varepsilon \varLL g(x_a^*) + \left[0  \right]\cdot g'(x_a^*)\\
+    &= -\varepsilon\varLL g(x_a^*) < 0 \label{eqn:negative}
+\end{align}
+The quantity in line (\ref{eqn:negative}) is negative. By assumption, $\varepsilon > 0$. Since $g$ is a probability density function, it is also
+positive. Finally, since reproductive success $\lambda$ increases with fecundity, the derivative is also positive, and so the expression is
+negative. 
+We conclude that the switching point will converge to $x_a^*$, and once there, it will not deviate: the switching point $x_a^*$ is both
+convergent and evolutionarily stable. 
+
+Remark that the switching point $x_a^* =  \varSS/\varLL$ has been computed specifically for dilemmas at age $a$. We therefore now extend to
+the evolutionarily stable patience threshold $(x_0^*, x_1^*, \ldots, x_{A-1}^*)$. 
+We may translate with ease between discounting functions and patience thresholds. Given any patience threshold $(x_0, x_1, \ldots)$, the corresponding
+discounting schedule is given by 
+\begin{equation}
+    \Delta(t) = \left( \prod\limits_{k = 0}^{t - 1} x_k \right)^{-1}. \label{eqn:disc_from_thresh}
+\end{equation}
+Consequently, the evolutionarily stable discounting function (corresponding to our derived patience threshold) is
+\begin{equation}
+    \Delta^*(a) = \varSS/\frac{\partial \lambda}{\partial b_0}. 
+    \label{eqn:stable_discounting}
+\end{equation}
+Between equations (\ref{eqn:disc_from_thresh}) and (\ref{eqn:stable_discounting}), the delay variable changes from $t$ to $a$. 
+We do so to highlight an important difference between the classical theory of time preferences and our approach. 
+Classical discounting functions are age agnostic: delayed rewards are discounted to present value. In our evolutionarily stable discounting
+function $\Delta^*(a)$, however, age matters. Rather than offering a reward today or more tomorrow, we offer a reward at age $a$ or a larger
+reward at age $a+1$. To compare delayed rewards against a common benchmark, delayed rewards are translated to discounted value at
+age $0$, the initial age class. 
+
+The Euler-Lotka equation can be leveraged to compute an expression for the evolutionarily stable switching points. By using
+implicit differentiation, we compute
+\begin{equation}
+    \frac{\partial \lambda}{\partial b_a} = K\cdot \lambda^{-a} \prod\limits_{k = 0}^{a-1}s_k,
+\end{equation}
+where $K>0$ is an expression independent of $a$. We can now compute the evolutionarily stable switching point 
+\begin{equation}
+    x_a^* = \frac{\varSS}{\varLL} = \frac{K\cdot \lambda^{-a} \prod\limits_{k = 0}^{a-1}s_k}{K\cdot \lambda^{-a-1} \prod\limits_{k = 0}^{a}s_k} = \frac{\lambda}{s_a}.
+\end{equation}
+We further compute the adaptive discounting function
+\begin{equation}
+    \Delta^*(a) = \lambda^{-a}\prod\limits_{k = 0}^{a-1} s_k.
+\end{equation}
 
 
 \end{document}
